@@ -4,7 +4,6 @@ import alphonso from "@/assets/mango-alphonso.jpg";
 import langra from "@/assets/mango-langra.jpg";
 import himsagar from "@/assets/mango-himsagar.jpg";
 import fazli from "@/assets/mango-fazli.jpg";
-import stack from "@/assets/mango-stack.jpg";
 import amrapali from "@/assets/mango-amrapali.jpg";
 import gopalbhog from "@/assets/mango-gopalbhog.jpg";
 
