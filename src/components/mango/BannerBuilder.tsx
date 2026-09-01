@@ -206,7 +206,7 @@ export function BannerBuilder() {
           </div>
 
           {/* Live preview */}
-          <div className="rounded-3xl border border-border bg-card p-4 sm:p-6">
+          <div className="self-start rounded-3xl border border-border bg-card p-4 sm:p-6">
             <p className={labelCls}>Live preview</p>
             <div className="mt-3 overflow-hidden rounded-2xl">
               <div
