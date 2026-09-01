@@ -15,7 +15,7 @@ export function VarietyCard({ variety }: { variety: Variety }) {
       <div className="overflow-hidden bg-accent/60">
         <img
           src={variety.image}
-          alt={`${variety.name} mangoes`}
+          alt={`${variety.bangla} আম — fresh ${variety.name} mangoes`}
           width={800}
           height={800}
           loading="lazy"

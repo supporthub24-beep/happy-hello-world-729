@@ -4,6 +4,7 @@ import alphonso from "@/assets/mango-alphonso.jpg";
 import langra from "@/assets/mango-langra.jpg";
 import himsagar from "@/assets/mango-himsagar.jpg";
 import fazli from "@/assets/mango-fazli.jpg";
+import stack from "@/assets/mango-stack.jpg";
 
 const varieties: Variety[] = [
   {
@@ -39,7 +40,7 @@ const varieties: Variety[] = [
     bangla: "আম্রপালি",
     price: "৳840 / kg",
     description: "Deep orange flesh, rich carotene and a late-season sugary punch.",
-    image: alphonso,
+    image: stack,
   },
   {
     name: "Gopalbhog",
