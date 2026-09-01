@@ -27,7 +27,7 @@ const slides: Slide[] = [
     title: "Nature's Sweetest Gift",
     subtitle: "Hand-picked at sunrise, shipped within 24 hours — no carbide, no cold storage.",
     cta: "এখনই অর্ডার করুন",
-    overlay: "from-[#2D2003]/70 via-[#2D2003]/35 to-transparent",
+    overlay: "from-[#1A1200]/85 via-[#1A1200]/55 to-[#1A1200]/10",
   },
   {
     id: "premium",
@@ -38,7 +38,7 @@ const slides: Slide[] = [
     title: "Crafted by the Orchard",
     subtitle: "Single-estate fruit, graded by hand and packed in cushioned crates.",
     cta: "প্রিমিয়াম দেখুন",
-    overlay: "from-[#0F1A0A]/85 via-[#0F1A0A]/45 to-transparent",
+    overlay: "from-[#08110A]/90 via-[#08110A]/60 to-[#08110A]/10",
   },
   {
     id: "seasonal",
@@ -50,7 +50,7 @@ const slides: Slide[] = [
     subtitle: "Mix any three varieties and save on every crate this week only.",
     cta: "অফার লুফে নিন",
     badge: "৳৩০০ ছাড়!",
-    overlay: "from-[#3A1C00]/70 via-[#3A1C00]/30 to-transparent",
+    overlay: "from-[#2A1200]/85 via-[#2A1200]/50 to-[#2A1200]/5",
   },
 ];
 
