@@ -16,8 +16,16 @@ const templates = [
 
 type TemplateId = (typeof templates)[number]["id"];
 
+const sunriseTheme = {
+  id: "sunrise",
+  label: "Sunrise",
+  bg: "#FF8C00",
+  accent: "#FFF8E7",
+  text: "#2D2003",
+};
+
 const themes = [
-  { id: "sunrise", label: "Sunrise", bg: "#FF8C00", accent: "#FFF8E7", text: "#2D2003" },
+  sunriseTheme,
   { id: "orchard", label: "Orchard", bg: "#2D5016", accent: "#FFA500", text: "#FFF8E7" },
   { id: "cream", label: "Cream", bg: "#FFF8E7", accent: "#FF8C00", text: "#2D5016" },
   { id: "midnight", label: "Midnight", bg: "#241C0B", accent: "#FFA500", text: "#FFF8E7" },
@@ -39,7 +47,7 @@ export function BannerBuilder() {
   const [busy, setBusy] = useState(false);
   const canvasRef = useRef<HTMLDivElement>(null);
 
-  const theme = themes.find((t) => t.id === themeId) ?? themes[0];
+  const theme = themes.find((t) => t.id === themeId) ?? sunriseTheme;
   const selectedImage = gallery.find((item) => item.src === image);
   const selectedSrcSet = selectedImage ? webpSrcSet(selectedImage.base) : undefined;
 
