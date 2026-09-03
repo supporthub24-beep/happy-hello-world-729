@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Toaster } from "@/components/ui/sonner";
 import { Navbar } from "@/components/mango/Navbar";
 import { Hero } from "@/components/mango/Hero";
 import { Varieties } from "@/components/mango/Varieties";
@@ -44,7 +43,6 @@ function Index() {
         <Newsletter />
       </main>
       <Footer />
-      <Toaster />
     </div>
   );
 }

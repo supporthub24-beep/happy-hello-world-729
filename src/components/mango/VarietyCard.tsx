@@ -1,6 +1,7 @@
 import { ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
 import { ResponsiveImage } from "./ResponsiveImage";
+import { parsePrice, useCart } from "@/lib/cart";
 
 export type Variety = {
   name: string;
@@ -12,6 +13,8 @@ export type Variety = {
 };
 
 export function VarietyCard({ variety }: { variety: Variety }) {
+  const { addItem } = useCart();
+
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-35px_rgba(45,80,22,0.6)]">
       <div className="overflow-hidden bg-accent/60">
@@ -37,7 +40,16 @@ export function VarietyCard({ variety }: { variety: Variety }) {
           {variety.description}
         </p>
         <button
-          onClick={() => toast.success(`${variety.name} added to cart`)}
+          onClick={() => {
+            addItem({
+              id: variety.base,
+              name: variety.name,
+              bangla: variety.bangla,
+              price: parsePrice(variety.price),
+              image: variety.image,
+            });
+            toast.success(`${variety.name} added to cart`);
+          }}
           className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-colors hover:bg-mango hover:text-primary-foreground"
         >
           <ShoppingCart className="size-4" /> Add to Cart
