@@ -7,6 +7,7 @@ import seasonal from "@/assets/banner-seasonal-offer.jpg";
 type Slide = {
   id: string;
   image: string;
+  base: string;
   alt: string;
   eyebrow: string;
   titleBn: string;
