@@ -69,10 +69,20 @@ export function BannerBuilder() {
         backgroundColor: theme.bg,
         scale: 1920 / rect.width,
         useCORS: true,
+        onclone: (documentClone) => {
+          const clonedCanvas = documentClone.querySelector('[data-banner-canvas="true"]');
+          clonedCanvas?.querySelectorAll("source").forEach((source) => source.remove());
+        },
       });
+      const output = document.createElement("canvas");
+      output.width = 1920;
+      output.height = 1080;
+      const outputContext = output.getContext("2d");
+      if (!outputContext) throw new Error("Canvas export is unavailable");
+      outputContext.drawImage(canvas, 0, 0, output.width, output.height);
       const link = document.createElement("a");
       link.download = "mango-fresh-banner-1920x1080.webp";
-      link.href = canvas.toDataURL("image/webp", 0.92);
+      link.href = output.toDataURL("image/webp", 0.92);
       link.click();
       toast.success("Full-resolution WebP banner downloaded");
     } catch {
@@ -232,6 +242,7 @@ export function BannerBuilder() {
             <div className="mt-3 overflow-hidden rounded-2xl">
               <div
                 ref={canvasRef}
+                data-banner-canvas="true"
                 className="flex aspect-[16/9] w-full overflow-hidden"
                 style={{ background: theme.bg, color: theme.text }}
               >
