@@ -6,6 +6,7 @@ import heroMangoes from "@/assets/hero-mangoes.jpg";
 import orchard from "@/assets/banner-orchard.jpg";
 import alphonso from "@/assets/mango-alphonso.jpg";
 import himsagar from "@/assets/mango-himsagar.jpg";
+import { webpSrcSet } from "@/lib/responsive-images";
 
 const templates = [
   { id: "split", label: "Split" },
@@ -23,10 +24,10 @@ const themes = [
 ];
 
 const gallery = [
-  { src: heroMangoes, label: "Harvest pile" },
-  { src: orchard, label: "Orchard" },
-  { src: alphonso, label: "Alphonso" },
-  { src: himsagar, label: "Sliced" },
+  { src: heroMangoes, base: "hero-mangoes", label: "Harvest pile" },
+  { src: orchard, base: "banner-orchard", label: "Orchard" },
+  { src: alphonso, base: "mango-alphonso", label: "Alphonso" },
+  { src: himsagar, base: "mango-himsagar", label: "Sliced" },
 ];
 
 export function BannerBuilder() {
@@ -38,7 +39,9 @@ export function BannerBuilder() {
   const [busy, setBusy] = useState(false);
   const canvasRef = useRef<HTMLDivElement>(null);
 
-  const theme = themes.find((t) => t.id === themeId) ?? themes[0]!;
+  const theme = themes.find((t) => t.id === themeId) ?? themes[0];
+  const selectedImage = gallery.find((item) => item.src === image);
+  const selectedSrcSet = selectedImage ? webpSrcSet(selectedImage.base) : undefined;
 
   const handleUpload = (file?: File) => {
     if (!file) return;
@@ -52,16 +55,18 @@ export function BannerBuilder() {
     setBusy(true);
     try {
       const html2canvas = (await import("html2canvas")).default;
+      const rect = canvasRef.current.getBoundingClientRect();
+      if (!rect.width) return;
       const canvas = await html2canvas(canvasRef.current, {
         backgroundColor: theme.bg,
-        scale: 2,
+        scale: 1920 / rect.width,
         useCORS: true,
       });
       const link = document.createElement("a");
-      link.download = "mango-fresh-banner.png";
-      link.href = canvas.toDataURL("image/png");
+      link.download = "mango-fresh-banner-1920x1080.webp";
+      link.href = canvas.toDataURL("image/webp", 0.92);
       link.click();
-      toast.success("Banner downloaded");
+      toast.success("Full-resolution WebP banner downloaded");
     } catch {
       toast.error("Could not export the banner. Please try again.");
     } finally {
@@ -174,12 +179,20 @@ export function BannerBuilder() {
                       image === g.src ? "border-mango" : "border-transparent"
                     }`}
                   >
-                    <img
-                      src={g.src}
-                      alt={g.label}
-                      loading="lazy"
-                      className="aspect-square w-full object-cover"
-                    />
+                    <picture>
+                      <source
+                        type="image/webp"
+                        srcSet={webpSrcSet(g.base)}
+                        sizes="(max-width: 1024px) 20vw, 76px"
+                      />
+                      <img
+                        src={g.src}
+                        alt={g.label}
+                        loading="lazy"
+                        decoding="async"
+                        className="aspect-square w-full object-cover"
+                      />
+                    </picture>
                   </button>
                 ))}
               </div>
@@ -229,14 +242,42 @@ export function BannerBuilder() {
                       <p className="text-[2.6vw] opacity-80 lg:text-[1.1vw]">{subtext}</p>
                     </div>
                     <div className="w-[42%] shrink-0">
-                      <img src={image} alt="Banner" className="size-full object-cover" />
+                       <picture className="block size-full">
+                         {selectedSrcSet && (
+                           <source
+                             type="image/webp"
+                             srcSet={selectedSrcSet}
+                             sizes="(max-width: 1024px) 42vw, 320px"
+                           />
+                         )}
+                         <img
+                           src={image}
+                           alt="Banner"
+                           decoding="async"
+                           className="size-full object-cover"
+                         />
+                       </picture>
                     </div>
                   </>
                 )}
 
                 {template === "overlay" && (
                   <div className="relative size-full">
-                    <img src={image} alt="Banner" className="size-full object-cover" />
+                     <picture className="block size-full">
+                       {selectedSrcSet && (
+                         <source
+                           type="image/webp"
+                           srcSet={selectedSrcSet}
+                           sizes="(max-width: 1024px) calc(100vw - 72px), 730px"
+                         />
+                       )}
+                       <img
+                         src={image}
+                         alt="Banner"
+                         decoding="async"
+                         className="size-full object-cover"
+                       />
+                     </picture>
                     <div
                       className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-[6%] text-center"
                       style={{ background: `${theme.bg}b3` }}
@@ -264,11 +305,21 @@ export function BannerBuilder() {
                       >
                         Mango Fresh
                       </p>
-                      <img
-                        src={image}
-                        alt="Banner"
-                        className="size-[12vw] rounded-full object-cover lg:size-[5vw]"
-                      />
+                       <picture className="block size-[12vw] overflow-hidden rounded-full lg:size-[5vw]">
+                         {selectedSrcSet && (
+                           <source
+                             type="image/webp"
+                             srcSet={selectedSrcSet}
+                             sizes="(max-width: 1024px) 12vw, 64px"
+                           />
+                         )}
+                         <img
+                           src={image}
+                           alt="Banner"
+                           decoding="async"
+                           className="size-full object-cover"
+                         />
+                       </picture>
                     </div>
                     <div>
                       <h3 className="font-display text-[6vw] leading-tight font-semibold lg:text-[3vw]">
@@ -285,7 +336,7 @@ export function BannerBuilder() {
               </div>
             </div>
             <p className="mt-3 text-xs text-muted-foreground">
-              Exports as a high-resolution PNG, ready for social posts or print.
+              Exports as a 1920 × 1080 WebP, ready for social posts or print.
             </p>
           </div>
         </div>
