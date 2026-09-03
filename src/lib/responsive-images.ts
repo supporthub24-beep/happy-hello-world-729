@@ -13,7 +13,8 @@ for (const [path, url] of Object.entries(modules)) {
   const file = path.split("/").pop()!.replace(".webp", "");
   const match = file.match(/^(.*)-(\d+)$/);
   if (!match) continue;
-  const [, base, width] = match;
+  const base = match[1]!;
+  const width = match[2]!;
   const list = byBase.get(base) ?? [];
   list.push({ width: Number(width), url });
   byBase.set(base, list);
