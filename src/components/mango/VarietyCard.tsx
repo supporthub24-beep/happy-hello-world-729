@@ -1,5 +1,6 @@
 import { ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
+import { ResponsiveImage } from "./ResponsiveImage";
 
 export type Variety = {
   name: string;
@@ -7,18 +8,20 @@ export type Variety = {
   price: string;
   description: string;
   image: string;
+  base: string;
 };
 
 export function VarietyCard({ variety }: { variety: Variety }) {
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-35px_rgba(45,80,22,0.6)]">
       <div className="overflow-hidden bg-accent/60">
-        <img
-          src={variety.image}
+        <ResponsiveImage
+          base={variety.base}
+          fallback={variety.image}
           alt={`${variety.bangla} আম — fresh ${variety.name} mangoes`}
-          width={800}
-          height={800}
-          loading="lazy"
+          width={1024}
+          height={1024}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
           className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
