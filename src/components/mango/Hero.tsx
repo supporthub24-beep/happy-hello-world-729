@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight, Leaf, Star, Truck } from "lucide-react";
+import { ResponsiveImage } from "./ResponsiveImage";
 import freshHarvest from "@/assets/banner-fresh-harvest.jpg";
 import premium from "@/assets/banner-premium.jpg";
 import seasonal from "@/assets/banner-seasonal-offer.jpg";
@@ -7,6 +8,7 @@ import seasonal from "@/assets/banner-seasonal-offer.jpg";
 type Slide = {
   id: string;
   image: string;
+  base: string;
   alt: string;
   eyebrow: string;
   titleBn: string;
@@ -21,6 +23,7 @@ const slides: Slide[] = [
   {
     id: "fresh-harvest",
     image: freshHarvest,
+    base: "banner-fresh-harvest",
     alt: "তাজা রসালো আম ও পাতা — Fresh juicy ripe mangoes with water droplets and green leaves",
     eyebrow: "Fresh Harvest · তাজা ফলন",
     titleBn: "আমের রাজ্যে স্বাগতম",
@@ -32,6 +35,7 @@ const slides: Slide[] = [
   {
     id: "premium",
     image: premium,
+    base: "banner-premium",
     alt: "প্রিমিয়াম কাটা আম — Premium sliced mango with vibrant orange flesh on dark linen and wood",
     eyebrow: "Premium Selection · প্রিমিয়াম",
     titleBn: "রাজকীয় স্বাদ, প্রতিটি কামড়ে",
@@ -43,6 +47,7 @@ const slides: Slide[] = [
   {
     id: "seasonal",
     image: seasonal,
+    base: "banner-seasonal-offer",
     alt: "বিভিন্ন জাতের আম — Flat-lay of multiple mango varieties on a bright orange burst background",
     eyebrow: "Seasonal Offer · মৌসুমি অফার",
     titleBn: "৳৩০০ ছাড়!",
@@ -78,11 +83,13 @@ export function Hero() {
                 i === index ? "opacity-100" : "pointer-events-none opacity-0"
               }`}
             >
-              <img
-                src={s.image}
+              <ResponsiveImage
+                base={s.base}
+                fallback={s.image}
                 alt={s.alt}
                 width={1920}
-                height={800}
+                height={1088}
+                sizes="(max-width: 768px) 100vw, min(100vw, 1280px)"
                 loading={i === 0 ? "eager" : "lazy"}
                 fetchPriority={i === 0 ? "high" : "low"}
                 className="size-full object-cover object-right md:object-center"

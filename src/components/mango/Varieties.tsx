@@ -14,6 +14,7 @@ const varieties: Variety[] = [
     price: "৳1,250 / kg",
     description: "Saffron-hued, buttery and intensely aromatic — the king of mangoes.",
     image: alphonso,
+    base: "mango-alphonso",
   },
   {
     name: "Langra",
@@ -21,6 +22,7 @@ const varieties: Variety[] = [
     price: "৳780 / kg",
     description: "Green-skinned with a fibreless, tangy-sweet pulp. A monsoon classic.",
     image: langra,
+    base: "mango-langra",
   },
   {
     name: "Himsagar",
@@ -28,6 +30,7 @@ const varieties: Variety[] = [
     price: "৳950 / kg",
     description: "Silky, seedless-thin stone and honeyed flavour. Perfect for desserts.",
     image: himsagar,
+    base: "mango-himsagar",
   },
   {
     name: "Fazli",
@@ -35,6 +38,7 @@ const varieties: Variety[] = [
     price: "৳620 / kg",
     description: "Big, generous fruit with mellow sweetness — best for sharing and pickles.",
     image: fazli,
+    base: "mango-fazli",
   },
   {
     name: "Amrapali",
@@ -42,6 +46,7 @@ const varieties: Variety[] = [
     price: "৳840 / kg",
     description: "Deep orange flesh, rich carotene and a late-season sugary punch.",
     image: amrapali,
+    base: "mango-amrapali",
   },
   {
     name: "Gopalbhog",
@@ -49,6 +54,7 @@ const varieties: Variety[] = [
     price: "৳890 / kg",
     description: "Earliest of the season, floral aroma with a soft melting texture.",
     image: gopalbhog,
+    base: "mango-gopalbhog",
   },
 ];
 
