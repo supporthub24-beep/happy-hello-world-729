@@ -161,7 +161,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       placeOrder,
       reorder,
     };
-  }, [items, subtotal, currentOrder, orders]);
+  }, [items, currentOrder, orders]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
