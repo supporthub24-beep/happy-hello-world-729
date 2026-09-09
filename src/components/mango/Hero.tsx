@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+ import { useCallback, useEffect, useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight, Leaf, Star, Truck } from "lucide-react";
 import { ResponsiveImage } from "./ResponsiveImage";
 import freshHarvest from "@/assets/banner-fresh-harvest.jpg";
@@ -73,7 +73,16 @@ export function Hero() {
 
   return (
     <section id="home" className="relative overflow-hidden px-3 pt-24 md:pt-28">
+      {/* Liquid glass ambient glow */}
+      <div className="absolute left-1/4 top-20 h-96 w-96 -translate-x-1/2 rounded-full bg-mango/20 blur-[128px]" />
+      <div className="absolute right-1/4 top-40 h-64 w-64 translate-x-1/2 rounded-full bg-mango/15 blur-[96px]" />
+      
       <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] md:rounded-[3.5rem]">
+        {/* Liquid glass border effect */}
+        <div className="absolute inset-0 z-20 rounded-[2.5rem] md:rounded-[3.5rem] bg-gradient-to-br from-mango/30 via-transparent to-mango/20 p-[1px] md:rounded-[3.5rem]">
+          <div className="size-full rounded-[2.5rem] md:rounded-[3.5rem] bg-gradient-to-br from-mango/5 via-transparent to-mango/10 backdrop-blur-sm" />
+        </div>
+        
         <div className="relative h-[560px] w-full md:h-[620px]">
           {slides.map((s, i) => (
             <div
@@ -95,49 +104,52 @@ export function Hero() {
                 className="size-full object-cover object-right md:object-center"
               />
               <div className={`absolute inset-0 bg-gradient-to-r ${s.overlay}`} />
+              {/* Liquid glass shimmer overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-mango/5 via-transparent to-white/5 opacity-60" />
 
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full max-w-2xl px-7 md:px-14">
-                  <span className="inline-flex items-center gap-2 rounded-full border border-mango/50 bg-black/25 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-mango backdrop-blur-sm">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-mango/40 bg-mango/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-mango backdrop-blur-xl shadow-[0_8px_32px_rgba(255,140,0,0.15)]">
                     <Leaf className="size-3.5" /> {s.eyebrow}
                   </span>
 
                   {s.badge && (
-                    <span className="ml-2 inline-flex rounded-full bg-mango px-4 py-1.5 text-xs font-bold text-primary-foreground">
+                    <span className="ml-2 inline-flex rounded-full bg-gradient-to-r from-mango to-mango/80 px-4 py-1.5 text-xs font-bold text-primary-foreground shadow-[0_4px_16px_rgba(255,140,0,0.4)] backdrop-blur-sm">
                       {s.badge}
                     </span>
                   )}
 
                   <h1 className="mt-5 font-display text-3xl leading-[1.15] font-semibold tracking-tight text-primary-foreground sm:text-5xl md:text-6xl">
                     {s.titleBn}
-                    <span className="mt-2 block text-mango">{s.title}</span>
+                    <span className="mt-2 block text-mango drop-shadow-lg">{s.title}</span>
                   </h1>
 
-                  <p className="mt-5 max-w-md text-sm leading-relaxed text-primary-foreground/85 md:text-base">
+                  <p className="mt-5 max-w-md text-sm leading-relaxed text-primary-foreground/90 md:text-base">
                     {s.subtitle}
                   </p>
 
                   <div className="mt-8 flex flex-wrap items-center gap-3">
                     <a
                       href="#varieties"
-                      className="group inline-flex items-center gap-2 rounded-full bg-mango px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-12px_rgba(255,140,0,0.85)] transition-transform hover:-translate-y-0.5"
+                      className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-mango to-mango/90 px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_8px_32px_rgba(255,140,0,0.35)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(255,140,0,0.45)] backdrop-blur-xl"
                     >
+                      <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                       {s.cta}
                       <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                     </a>
                     <a
                       href="#banner-builder"
-                      className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/40 px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-foreground hover:text-secondary"
+                      className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 bg-primary-foreground/10 px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary-foreground/20 hover:border-primary-foreground/50 backdrop-blur-xl"
                     >
                       Try Banner Builder
                     </a>
                   </div>
 
-                  <div className="mt-9 flex flex-wrap gap-6 text-sm text-primary-foreground/85">
-                    <div className="flex items-center gap-2">
+                  <div className="mt-9 flex flex-wrap gap-6 text-sm text-primary-foreground/90">
+                    <div className="flex items-center gap-2 rounded-full border border-mango/20 bg-mango/10 px-4 py-2 backdrop-blur-md">
                       <Star className="size-4 fill-mango text-mango" /> 4.9 / 5 · 2,400+ orders
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 rounded-full border border-mango/20 bg-mango/10 px-4 py-2 backdrop-blur-md">
                       <Truck className="size-4 text-mango" /> Free delivery over ৳1500
                     </div>
                   </div>
@@ -149,14 +161,14 @@ export function Hero() {
           <button
             onClick={() => go(-1)}
             aria-label="Previous banner"
-            className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/30 p-2.5 text-primary-foreground backdrop-blur-sm transition-colors hover:bg-black/50 md:left-6"
+            className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-primary-foreground/20 bg-primary-foreground/10 p-2.5 text-primary-foreground backdrop-blur-xl transition-all hover:bg-primary-foreground/20 hover:border-primary-foreground/40 md:left-6"
           >
             <ChevronLeft className="size-5" />
           </button>
           <button
             onClick={() => go(1)}
             aria-label="Next banner"
-            className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/30 p-2.5 text-primary-foreground backdrop-blur-sm transition-colors hover:bg-black/50 md:right-6"
+            className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-primary-foreground/20 bg-primary-foreground/10 p-2.5 text-primary-foreground backdrop-blur-xl transition-all hover:bg-primary-foreground/20 hover:border-primary-foreground/40 md:right-6"
           >
             <ChevronRight className="size-5" />
           </button>
@@ -168,8 +180,8 @@ export function Hero() {
                 onClick={() => setIndex(i)}
                 aria-label={`Show banner ${i + 1}`}
                 aria-current={i === index}
-                className={`h-2 rounded-full transition-all ${
-                  i === index ? "w-8 bg-mango" : "w-2 bg-primary-foreground/50"
+                className={`h-2 rounded-full transition-all backdrop-blur-sm ${
+                  i === index ? "w-8 bg-gradient-to-r from-mango to-mango/70 shadow-[0_4px_12px_rgba(255,140,0,0.4)]" : "w-2 bg-primary-foreground/40 border border-primary-foreground/20"
                 }`}
               />
             ))}
