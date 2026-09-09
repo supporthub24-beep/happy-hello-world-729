@@ -1,4 +1,4 @@
-  import { useEffect, useState } from "react";
+ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Citrus, Menu, ShoppingCart, X } from "lucide-react";
 import { useCart } from "@/lib/cart";

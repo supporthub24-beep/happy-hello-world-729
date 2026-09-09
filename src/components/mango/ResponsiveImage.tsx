@@ -1,4 +1,4 @@
-import { webpSrcSet } from "@/lib/responsive-images";
+ import { webpSrcSet } from "@/lib/responsive-images";
 
 type Props = {
   /** Base file name without extension, e.g. "mango-alphonso" */
