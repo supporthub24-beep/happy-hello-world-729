@@ -33,8 +33,9 @@ const inputClass =
 function CheckoutPage() {
   const { items, subtotal, clear } = useCart();
   const navigate = useNavigate();
-  const [method, setMethod] = useState<"cod" | "bkash">("cod");
+  const [method, setMethod] = useState<"cod" | "bkash" | "bank">("cod");
   const [submitting, setSubmitting] = useState(false);
+  const [showBankModal, setShowBankModal] = useState(false);
 
   const delivery = items.length === 0 || subtotal >= FREE_DELIVERY_OVER ? 0 : DELIVERY_FEE;
   const total = subtotal + delivery;
@@ -173,6 +174,21 @@ function CheckoutPage() {
                       )}
                     </span>
                   </label>
+                  <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-border p-4 text-sm">
+                    <input
+                      type="radio"
+                      name="method"
+                      checked={method === "bank"}
+                      onChange={() => setMethod("bank")}
+                      className="mt-1"
+                    />
+                    <span>
+                      <span className="font-semibold text-secondary">Bank Transfer</span>
+                      <span className="block text-muted-foreground">
+                        ব্যাঙ্ক কার্ড দিয়ে নিরাপদ পেমেন্ট।
+                      </span>
+                    </span>
+                  </label>
                 </div>
               </section>
             </div>
@@ -202,15 +218,203 @@ function CheckoutPage() {
               <button
                 type="submit"
                 disabled={submitting}
+                onClick={(e) => {
+                  if (method === "bank") {
+                    e.preventDefault();
+                    setShowBankModal(true);
+                  }
+                }}
                 className="mt-6 w-full rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-60"
               >
-                Place order
+                {method === "bank" ? "Pay with Bank" : "Place order"}
               </button>
             </aside>
           </form>
         )}
       </main>
       <Footer />
+
+      {showBankModal && (
+        <BankPaymentModal
+          total={total}
+          onClose={() => setShowBankModal(false)}
+          onSuccess={() => {
+            setSubmitting(true);
+            const form = document.querySelector("form");
+            if (form) {
+              const formData = new FormData(form as HTMLFormElement);
+              const order = {
+                id: `MF-${Date.now().toString().slice(-6)}`,
+                name: String(formData.get("name") ?? ""),
+                phone: String(formData.get("phone") ?? ""),
+                address: String(formData.get("address") ?? ""),
+                note: String(formData.get("note") ?? ""),
+                status: "প্রস্তুত করা হচ্ছে" as const,
+                statusSteps: [
+                  { name: "অর্ডার গৃহীত", done: true, time: new Date().toISOString() },
+                  { name: "প্রস্তুত করা হচ্ছে", done: true, time: new Date().toISOString() },
+                  { name: "পাঠানো হয়েছে", done: false },
+                  { name: "ডেলিভারি হয়েছে", done: false },
+                ] as const,
+                method: "bank" as const,
+                trxId: `BANK-${Date.now().toString().slice(-8)}`,
+                total,
+                items: items.map((i) => ({ name: i.name, qty: i.qty, price: i.price, id: i.id })),
+                createdAt: new Date().toISOString(),
+              };
+              localStorage.setItem("mango-fresh-last-order", JSON.stringify(order));
+              clear();
+              navigate({ to: "/order-confirmed" });
+            }
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
+function BankPaymentModal({
+  total,
+  onClose,
+  onSuccess,
+}: {
+  total: number;
+  onClose: () => void;
+  onSuccess: () => void;
+}) {
+  const [step, setStep] = useState<"card" | "otp" | "processing" | "success">("card");
+  const [cardNumber, setCardNumber] = useState("");
+  const [expiry, setExpiry] = useState("");
+  const [cvv, setCvv] = useState("");
+  const [otp, setOtp] = useState("");
+
+  const isValidCard = cardNumber.replace(/\s/g, "").length === 16 && expiry.length === 5 && cvv.length === 3;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+      <div className="w-full max-w-md rounded-3xl border border-border bg-card p-6 shadow-2xl">
+        <div className="flex items-center justify-between">
+          <h3 className="font-display text-xl font-semibold text-secondary">Bank Payment</h3>
+          <button
+            onClick={onClose}
+            className="rounded-full p-2 text-muted-foreground hover:bg-accent"
+          >
+            ✕
+          </button>
+        </div>
+
+        {step === "card" && (
+          <div className="mt-6 space-y-4">
+            <div>
+              <label className="text-sm font-medium text-secondary">Card Number</label>
+              <input
+                type="text"
+                value={cardNumber}
+                onChange={(e) => {
+                  const v = e.target.value.replace(/\D/g, "").slice(0, 16);
+                  setCardNumber(v.replace(/(\d{4})(?=\d)/g, "$1 "));
+                }}
+                placeholder="1234 5678 9012 3456"
+                className={inputClass}
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="text-sm font-medium text-secondary">Expiry</label>
+                <input
+                  type="text"
+                  value={expiry}
+                  onChange={(e) => {
+                    const v = e.target.value.replace(/\D/g, "").slice(0, 4);
+                    if (v.length >= 2) {
+                      setExpiry(`${v.slice(0, 2)}/${v.slice(2)}`);
+                    } else {
+                      setExpiry(v);
+                    }
+                  }}
+                  placeholder="MM/YY"
+                  className={inputClass}
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-secondary">CVV</label>
+                <input
+                  type="password"
+                  value={cvv}
+                  onChange={(e) => setCvv(e.target.value.replace(/\D/g, "").slice(0, 3))}
+                  placeholder="123"
+                  className={inputClass}
+                />
+              </div>
+            </div>
+            <div className="mt-4 rounded-2xl bg-mango/10 p-4">
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Amount to pay:</span>
+                <span className="font-semibold text-mango-deep">{formatBDT(total)}</span>
+              </div>
+            </div>
+            <button
+              onClick={() => isValidCard && setStep("otp")}
+              disabled={!isValidCard}
+              className="w-full rounded-full bg-secondary py-3 text-sm font-semibold text-secondary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-60"
+            >
+              Proceed to OTP
+            </button>
+          </div>
+        )}
+
+        {step === "otp" && (
+          <div className="mt-6 space-y-4">
+            <p className="text-sm text-muted-foreground">
+              একটি ওটিপি আপনার মোবাইলে পাঠানো হয়েছে (ডেমো: 123456)
+            </p>
+            <div>
+              <label className="text-sm font-medium text-secondary">Enter OTP</label>
+              <input
+                type="text"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                placeholder="123456"
+                className={inputClass}
+              />
+            </div>
+            <button
+              onClick={() => {
+                if (otp === "123456") {
+                  setStep("processing");
+                  setTimeout(() => {
+                    setStep("success");
+                    setTimeout(onSuccess, 800);
+                  }, 1500);
+                } else {
+                  toast.error("Invalid OTP. Try 123456");
+                }
+              }}
+              disabled={otp.length !== 6}
+              className="w-full rounded-full bg-secondary py-3 text-sm font-semibold text-secondary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-60"
+            >
+              Verify & Pay
+            </button>
+          </div>
+        )}
+
+        {(step === "processing" || step === "success") && (
+          <div className="mt-8 flex flex-col items-center justify-center py-8">
+            <div className={`h-16 w-16 rounded-full ${step === "success" ? "bg-green-500" : "bg-mango"} flex items-center justify-center`}>
+              {step === "processing" ? (
+                <div className="h-8 w-8 animate-spin rounded-full border-2 border-white border-t-transparent" />
+              ) : (
+                <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                </svg>
+              )}
+            </div>
+            <p className="mt-4 text-sm font-medium text-secondary">
+              {step === "processing" ? "Processing transaction..." : "Payment successful!"}
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
