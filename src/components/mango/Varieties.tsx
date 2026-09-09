@@ -1,4 +1,4 @@
-import { Reveal } from "./Reveal";
+ import { Reveal } from "./Reveal";
 import { VarietyCard, type Variety } from "./VarietyCard";
 import alphonso from "@/assets/mango-alphonso.jpg";
 import langra from "@/assets/mango-langra.jpg";

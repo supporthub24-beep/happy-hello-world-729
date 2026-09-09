@@ -1,4 +1,4 @@
-import { ShoppingCart } from "lucide-react";
+ import { ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
 import { ResponsiveImage } from "./ResponsiveImage";
 import { parsePrice, useCart } from "@/lib/cart";

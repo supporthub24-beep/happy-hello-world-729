@@ -1,4 +1,4 @@
-import { Citrus, Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
+ import { Citrus, Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
 
 export function Footer() {
   return (

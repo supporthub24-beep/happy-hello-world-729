@@ -1,4 +1,4 @@
-import { Leaf, Timer, Wallet } from "lucide-react";
+ import { Leaf, Timer, Wallet } from "lucide-react";
 import { Reveal } from "./Reveal";
 
 const features = [
