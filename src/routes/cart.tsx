@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { Navbar } from "@/components/mango/Navbar";
 import { Footer } from "@/components/mango/Footer";

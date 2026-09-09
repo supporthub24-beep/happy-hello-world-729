@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+ import { useState, type FormEvent } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Navbar } from "@/components/mango/Navbar";
@@ -56,10 +56,19 @@ function CheckoutPage() {
       name: String(form.get("name") ?? ""),
       phone: String(form.get("phone") ?? ""),
       address: String(form.get("address") ?? ""),
+      note: String(form.get("note") ?? ""),
+      status: "প্রস্তুত করা হচ্ছে" as const,
+      statusSteps: [
+        { name: "অর্ডার গৃহীত", done: true, time: new Date().toISOString() },
+        { name: "প্রস্তুত করা হচ্ছে", done: true, time: new Date().toISOString() },
+        { name: "পাঠানো হয়েছে", done: false },
+        { name: "ডেলিভারি হয়েছে", done: false },
+      ] as const,
       method,
       trxId: String(form.get("trxId") ?? ""),
       total,
-      items: items.map((i) => ({ name: i.name, qty: i.qty, price: i.price })),
+      items: items.map((i) => ({ name: i.name, qty: i.qty, price: i.price, id: i.id })),
+      createdAt: new Date().toISOString(),
     };
     localStorage.setItem("mango-fresh-last-order", JSON.stringify(order));
     clear();
