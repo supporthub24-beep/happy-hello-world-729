@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+ import { useRef, useState } from "react";
 import { Download, ImagePlus, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { Reveal } from "./Reveal";
@@ -255,10 +255,10 @@ export function BannerBuilder() {
                       >
                         Mango Fresh
                       </p>
-                      <h3 className="font-display text-[5vw] leading-tight font-semibold lg:text-[2.4vw]">
+                      <h3 className="font-display text-[5vw] leading-tight font-semibold lg:text-[2.4vw]" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.1)" }}>
                         {headline}
                       </h3>
-                      <p className="text-[2.6vw] opacity-80 lg:text-[1.1vw]">{subtext}</p>
+                      <p className="text-[2.6vw] lg:text-[1.1vw]" style={{ opacity: 0.95 }}>{subtext}</p>
                     </div>
                     <div className="w-[42%] shrink-0">
                        <picture className="block size-full">
@@ -299,7 +299,7 @@ export function BannerBuilder() {
                      </picture>
                     <div
                       className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-[6%] text-center"
-                      style={{ background: `${theme.bg}b3` }}
+                      style={{ background: `${theme.bg}e6` }}
                     >
                       <p
                         className="text-[2.4vw] font-semibold uppercase tracking-[0.3em] lg:text-[0.9vw]"
@@ -307,10 +307,10 @@ export function BannerBuilder() {
                       >
                         Mango Fresh
                       </p>
-                      <h3 className="font-display text-[5.4vw] leading-tight font-semibold lg:text-[2.6vw]">
+                      <h3 className="font-display text-[5.4vw] leading-tight font-semibold lg:text-[2.6vw]" style={{ textShadow: "0 2px 4px rgba(0,0,0,0.2)" }}>
                         {headline}
                       </h3>
-                      <p className="text-[2.6vw] opacity-85 lg:text-[1.1vw]">{subtext}</p>
+                      <p className="text-[2.6vw] lg:text-[1.1vw]" style={{ opacity: 0.95, textShadow: "0 1px 2px rgba(0,0,0,0.15)" }}>{subtext}</p>
                     </div>
                   </div>
                 )}
@@ -341,14 +341,14 @@ export function BannerBuilder() {
                        </picture>
                     </div>
                     <div>
-                      <h3 className="font-display text-[6vw] leading-tight font-semibold lg:text-[3vw]">
+                      <h3 className="font-display text-[6vw] leading-tight font-semibold lg:text-[3vw]" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.1)" }}>
                         {headline}
                       </h3>
                       <div
                         className="my-[2%] h-px w-full"
-                        style={{ background: theme.accent, opacity: 0.6 }}
+                        style={{ background: theme.accent, opacity: 0.8 }}
                       />
-                      <p className="text-[2.6vw] opacity-80 lg:text-[1.1vw]">{subtext}</p>
+                      <p className="text-[2.6vw] lg:text-[1.1vw]" style={{ opacity: 0.95 }}>{subtext}</p>
                     </div>
                   </div>
                 )}

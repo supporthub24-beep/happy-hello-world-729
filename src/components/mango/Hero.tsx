@@ -30,7 +30,7 @@ const slides: Slide[] = [
     title: "Nature's Sweetest Gift",
     subtitle: "Hand-picked at sunrise, shipped within 24 hours — no carbide, no cold storage.",
     cta: "এখনই অর্ডার করুন",
-    overlay: "from-[#1A1200]/85 via-[#1A1200]/55 to-[#1A1200]/10",
+    overlay: "from-[#1A1200]/90 via-[#1A1200]/65 to-[#1A1200]/20",
   },
   {
     id: "premium",
@@ -42,7 +42,7 @@ const slides: Slide[] = [
     title: "Crafted by the Orchard",
     subtitle: "Single-estate fruit, graded by hand and packed in cushioned crates.",
     cta: "প্রিমিয়াম দেখুন",
-    overlay: "from-[#08110A]/90 via-[#08110A]/60 to-[#08110A]/10",
+    overlay: "from-[#08110A]/95 via-[#08110A]/70 to-[#08110A]/20",
   },
   {
     id: "seasonal",
@@ -55,7 +55,7 @@ const slides: Slide[] = [
     subtitle: "Mix any three varieties and save on every crate this week only.",
     cta: "অফার লুফে নিন",
     badge: "৳৩০০ ছাড়!",
-    overlay: "from-[#2A1200]/85 via-[#2A1200]/50 to-[#2A1200]/5",
+    overlay: "from-[#2A1200]/90 via-[#2A1200]/60 to-[#2A1200]/15",
   },
 ];
 
@@ -109,14 +109,12 @@ export function Hero() {
               />
               <div className={`absolute inset-0 bg-gradient-to-r ${s.overlay}`} />
               {/* Liquid glass shimmer overlay - subtle light refraction */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-mango/5 to-transparent opacity-80" />
-              {/* Liquid glass caustic light effect */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-mango/10 via-transparent to-white/10 opacity-40 animate-pulse" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/15 via-mango/5 to-transparent" />
 
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full max-w-2xl px-7 md:px-14">
                   {/* Liquid glass eyebrow badge */}
-                  <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-mango shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)] backdrop-blur-xl">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/25 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-mango shadow-[inset_0_1px_1px_rgba(255,255,255,0.5)] backdrop-blur-xl">
                     <Leaf className="size-3.5" /> {s.eyebrow}
                   </span>
 
@@ -126,12 +124,12 @@ export function Hero() {
                     </span>
                   )}
 
-                  <h1 className="mt-5 font-display text-3xl leading-[1.15] font-semibold tracking-tight text-primary-foreground sm:text-5xl md:text-6xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]">
+                  <h1 className="mt-5 font-display text-[1.75rem] leading-[1.2] font-semibold tracking-tight text-primary-foreground sm:text-5xl md:text-6xl drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
                     {s.titleBn}
-                    <span className="mt-2 block text-mango drop-shadow-[0_2px_12px_rgba(255,140,0,0.4)]">{s.title}</span>
+                    <span className="mt-2 block text-mango drop-shadow-[0_4px_16px_rgba(0,0,0,0.4)]">{s.title}</span>
                   </h1>
 
-                  <p className="mt-5 max-w-md text-sm leading-relaxed text-primary-foreground/95 md:text-base drop-shadow-[0_1px_4px_rgba(0,0,0,0.2)]">
+                  <p className="mt-5 max-w-md text-sm leading-relaxed text-primary-foreground md:text-lg drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
                     {s.subtitle}
                   </p>
 
@@ -139,28 +137,30 @@ export function Hero() {
                     {/* Liquid glass CTA button */}
                     <a
                       href="#varieties"
-                      className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-mango/90 px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_8px_32px_rgba(255,140,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.3)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(255,140,0,0.45)] backdrop-blur-xl border border-mango/30"
+                      className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-mango px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_8px_32px_rgba(255,140,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(255,140,0,0.5)] backdrop-blur-xl border border-mango/40"
                     >
-                      <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                      <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                       {s.cta}
                       <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                     </a>
                     {/* Liquid glass secondary button */}
                     <a
                       href="#banner-builder"
-                      className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-white/20 hover:border-white/50 shadow-[0_4px_16px_rgba(0,0,0,0.1),inset_0_1px_1px_rgba(255,255,255,0.2)] backdrop-blur-xl"
+                      className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/15 px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-white/25 hover:border-white/60 shadow-[0_4px_16px_rgba(0,0,0,0.15),inset_0_1px_1px_rgba(255,255,255,0.25)] backdrop-blur-xl"
                     >
                       Try Banner Builder
                     </a>
                   </div>
 
                   {/* Liquid glass info badges */}
-                  <div className="mt-9 flex flex-wrap gap-6 text-sm text-primary-foreground/95">
-                    <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] backdrop-blur-md">
-                      <Star className="size-4 fill-mango text-mango" /> 4.9 / 5 · 2,400+ orders
+                  <div className="mt-9 flex flex-wrap gap-3 text-sm text-primary-foreground">
+                    <div className="flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-2 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] backdrop-blur-md">
+                      <Star className="size-4 fill-mango text-mango" /> 
+                      <span className="font-medium">৪.৯ Rating · ২,৪০০+ অর্ডার</span>
                     </div>
-                    <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] backdrop-blur-md">
-                      <Truck className="size-4 text-mango" /> Free delivery over ৳1500
+                    <div className="flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-2 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] backdrop-blur-md">
+                      <Truck className="size-4 fill-mango text-mango" /> 
+                      <span className="font-medium">১৫০০+ টাকায় ফ্রি ডেলিভারি</span>
                     </div>
                   </div>
                 </div>
@@ -172,14 +172,14 @@ export function Hero() {
           <button
             onClick={() => go(-1)}
             aria-label="Previous banner"
-            className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/30 bg-white/10 p-2.5 text-primary-foreground shadow-[0_4px_16px_rgba(0,0,0,0.1),inset_0_1px_1px_rgba(255,255,255,0.2)] backdrop-blur-xl transition-all hover:bg-white/20 hover:border-white/50 md:left-6"
+            className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/40 bg-white/15 p-2.5 text-primary-foreground shadow-[0_4px_16px_rgba(0,0,0,0.15),inset_0_1px_1px_rgba(255,255,255,0.25)] backdrop-blur-xl transition-all hover:bg-white/25 hover:border-white/60 md:left-6"
           >
             <ChevronLeft className="size-5" />
           </button>
           <button
             onClick={() => go(1)}
             aria-label="Next banner"
-            className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/30 bg-white/10 p-2.5 text-primary-foreground shadow-[0_4px_16px_rgba(0,0,0,0.1),inset_0_1px_1px_rgba(255,255,255,0.2)] backdrop-blur-xl transition-all hover:bg-white/20 hover:border-white/50 md:right-6"
+            className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/40 bg-white/15 p-2.5 text-primary-foreground shadow-[0_4px_16px_rgba(0,0,0,0.15),inset_0_1px_1px_rgba(255,255,255,0.25)] backdrop-blur-xl transition-all hover:bg-white/25 hover:border-white/60 md:right-6"
           >
             <ChevronRight className="size-5" />
           </button>
@@ -193,7 +193,7 @@ export function Hero() {
                 aria-label={`Show banner ${i + 1}`}
                 aria-current={i === index}
                 className={`h-2 rounded-full transition-all backdrop-blur-sm ${
-                  i === index ? "w-8 bg-gradient-to-r from-mango to-mango/70 shadow-[0_4px_12px_rgba(255,140,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.3)]" : "w-2 bg-white/40 border border-white/30 hover:bg-white/60"
+                  i === index ? "w-8 bg-gradient-to-r from-mango to-mango/70 shadow-[0_4px_12px_rgba(255,140,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.4)]" : "w-2 bg-white/50 border border-white/40 hover:bg-white/70"
                 }`}
               />
             ))}
