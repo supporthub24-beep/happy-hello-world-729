@@ -1,4 +1,4 @@
-  import { Reveal } from "./Reveal";
+import { Reveal } from "./Reveal";
 import { VarietyCard, type Variety } from "./VarietyCard";
 import alphonso from "@/assets/mango-alphonso.jpg";
 import langra from "@/assets/mango-langra.jpg";
@@ -6,6 +6,7 @@ import himsagar from "@/assets/mango-himsagar.jpg";
 import fazli from "@/assets/mango-fazli.jpg";
 import amrapali from "@/assets/mango-amrapali.jpg";
 import gopalbhog from "@/assets/mango-gopalbhog.jpg";
+import slicedPlate from "@/assets/mango-stack.jpg";
 
 const varieties: Variety[] = [
   {
@@ -74,6 +75,23 @@ export function Varieties() {
               প্রতি বাক্স হাতে বাছাই করা এবং গাছ ছাড়ার দিনই প্যাক করা হয়
             </p>
           </div>
+        </Reveal>
+
+        <Reveal delay={80}>
+          <figure className="mt-10 overflow-hidden rounded-3xl border border-border/50 shadow-xl">
+            <img
+              src={slicedPlate}
+              alt="স্তূপ করে সাজানো তাজা পাকা আম — A natural stack of freshly harvested ripe mangoes with leaves"
+              width={1280}
+              height={853}
+              loading="lazy"
+              decoding="async"
+              className="aspect-[3/2] w-full object-cover"
+            />
+            <figcaption className="bg-card px-6 py-4 text-sm font-medium text-muted-foreground">
+              গাছ পাকা আম, হাতে বাছাই করা — প্রতিটি টুকরোয় মৌসুমের আসল স্বাদ।
+            </figcaption>
+          </figure>
         </Reveal>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -1,4 +1,4 @@
- import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight, Leaf, Star, Truck } from "lucide-react";
 import { ResponsiveImage } from "./ResponsiveImage";
 import freshHarvest from "@/assets/banner-fresh-harvest.jpg";
