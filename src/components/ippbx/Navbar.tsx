@@ -85,6 +85,24 @@ export function Navbar() {
             <Phone className="h-4 w-4" aria-hidden="true" />
             09638461270
           </a>
+          <a
+            href="https://itfair.bd/support"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="সাপোর্ট"
+            className="group inline-flex items-center gap-2 rounded-full border border-ippbx-border px-3 py-1.5 text-sm font-semibold text-foreground transition-colors hover:border-ippbx-blue hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
+          >
+            <img
+              src="/generated/3d7e44ea-d49-hello-world-support-logo.png"
+              alt="সাপোর্ট"
+              width={28}
+              height={28}
+              loading="lazy"
+              decoding="async"
+              className="h-7 w-7 rounded-full object-contain transition-transform duration-300 group-hover:scale-105"
+            />
+            <span>Support</span>
+          </a>
         </div>
 
         <button
@@ -137,6 +155,24 @@ export function Navbar() {
               >
                 <Phone className="h-4 w-4" aria-hidden="true" />
                 09638461270
+              </a>
+              <a
+                href="https://itfair.bd/support"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-ippbx-border px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:border-ippbx-blue hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
+              >
+                <img
+                  src="/generated/3d7e44ea-d49-hello-world-support-logo.png"
+                  alt="সাপোর্ট"
+                  width={28}
+                  height={28}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-7 w-7 rounded-full object-contain"
+                />
+                Support
               </a>
             </li>
           </ul>
