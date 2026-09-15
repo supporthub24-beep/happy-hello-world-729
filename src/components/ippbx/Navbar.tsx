@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, Phone, Signal, X } from "lucide-react";
+import { Menu, Phone, X } from "lucide-react";
 
 const navLinks = [
   { label: "রিভিউ", href: "#about" },
@@ -43,9 +43,14 @@ export function Navbar() {
           className="group flex items-center gap-2.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ippbx-navy"
           aria-label="ITFair হোমপেজ"
         >
-          <span className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-ippbx-blue to-ippbx-violet shadow-lg shadow-ippbx-blue/30 transition-transform duration-300 group-hover:scale-105">
-            <Signal className="h-5 w-5 text-white" aria-hidden="true" />
-          </span>
+          <img
+            src="/generated/3d7e44ea-d49-hello-world-support-logo.png"
+            alt="ITFair লোগো"
+            width={40}
+            height={40}
+            decoding="async"
+            className="h-10 w-10 rounded-xl object-contain transition-transform duration-300 group-hover:scale-105"
+          />
           <span className="flex flex-col leading-none">
             <span className="font-display text-xl font-bold tracking-tight text-foreground">
               ITFair
