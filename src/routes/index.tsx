@@ -1,27 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Navbar } from "@/components/mango/Navbar";
-import { Hero } from "@/components/mango/Hero";
-import { Varieties } from "@/components/mango/Varieties";
-import { BannerBuilder } from "@/components/mango/BannerBuilder";
-import { WhyChooseUs } from "@/components/mango/WhyChooseUs";
-import { Testimonials } from "@/components/mango/Testimonials";
-import { Newsletter } from "@/components/mango/Newsletter";
-import { Footer } from "@/components/mango/Footer";
+import { Navbar } from "@/components/ippbx/Navbar";
+import { Hero } from "@/components/ippbx/Hero";
+import { Stats } from "@/components/ippbx/Stats";
+import { OfferBanner } from "@/components/ippbx/OfferBanner";
+import { TrialFeatures } from "@/components/ippbx/TrialFeatures";
+import { Footer } from "@/components/ippbx/Footer";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Mango Fresh — Farm-Direct Mangoes Delivered to Your Door" },
+      { title: "ITFair IPPBX — কল সেন্টার IPPBX সলিউশন | ৩ দিন ফ্রি ট্রায়াল" },
       {
         name: "description",
         content:
-          "Hand-picked Alphonso, Langra, Himsagar and Fazli mangoes shipped within 24 hours of harvest. Build your own mango promo banner in seconds.",
+          "WooCommerce প্লাগিন, ভয়েস মার্কেটিং, SMS মার্কেটিং, অর্ডার ভেরিফাই, IVR ও কল রেকর্ডিং — সব সুবিধা এক প্ল্যাটফর্মে। ০৳ এ শুরু করুন, ৩ দিন ফ্রি ট্রায়াল।",
       },
-      { property: "og:title", content: "Mango Fresh — Farm-Direct Mangoes" },
+      { property: "og:title", content: "ITFair IPPBX — কল সেন্টার IPPBX সলিউশন" },
       {
         property: "og:description",
         content:
-          "Naturally ripened, farm-direct mangoes delivered fresh, plus a free mango banner builder.",
+          "১ মাস সার্ভিস চার্জ ফ্রি, ফ্রি IP নাম্বার ও ফ্রি IVR ভয়েস রেকর্ডিং সহ সম্পূর্ণ IPPBX সলিউশন।",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -32,15 +30,13 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen bg-background font-sans">
+    <div id="top" className="min-h-screen bg-background font-sans">
       <Navbar />
       <main>
         <Hero />
-        <Varieties />
-        <BannerBuilder />
-        <WhyChooseUs />
-        <Testimonials />
-        <Newsletter />
+        <Stats />
+        <OfferBanner />
+        <TrialFeatures />
       </main>
       <Footer />
     </div>
