@@ -1,25 +1,55 @@
- import { Citrus, Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
+
+const socialLinks = [
+  { label: "Instagram", href: "https://instagram.com", Icon: Instagram },
+  { label: "Facebook", href: "https://facebook.com", Icon: Facebook },
+  { label: "Twitter", href: "https://twitter.com", Icon: Twitter },
+];
+
+const quickLinks = [
+  { label: "Home", to: "/" },
+  { label: "Varieties", to: "/", hash: "varieties" },
+  { label: "About", to: "/", hash: "about" },
+  { label: "Banner Builder", to: "/", hash: "banner-builder" },
+];
+
+const supportLinks = [
+  { label: "Shipping & returns", to: "/", hash: "shipping" },
+  { label: "Track order", to: "/", hash: "track-order" },
+  { label: "Wholesale", to: "/", hash: "wholesale" },
+  { label: "FAQ", to: "/", hash: "faq" },
+];
 
 export function Footer() {
   return (
     <footer id="contact" className="border-t border-border bg-secondary text-secondary-foreground">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-4">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="flex size-9 items-center justify-center rounded-full bg-mango text-primary-foreground">
-              <Citrus className="size-5" />
-            </span>
-            <span className="font-display text-xl font-semibold">Mango Fresh</span>
-          </div>
+          <Link
+            to="/"
+            hash="top"
+            aria-label="Hello World হোমপেজে ফিরে যান"
+            className="group inline-flex items-center gap-2.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mango focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
+          >
+            <img
+              src="/generated/f802737f-026-hello-world-footer-logo.png"
+              alt="Hello World লোগো"
+              className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105 sm:h-12"
+            />
+            <span className="font-display text-xl font-semibold">Hello World</span>
+          </Link>
           <p className="mt-4 max-w-xs text-sm text-secondary-foreground/70">
             Farm-direct mangoes from family orchards, picked ripe and shipped fast.
           </p>
           <div className="mt-5 flex gap-3">
-            {[Instagram, Facebook, Twitter].map((Icon, i) => (
+            {socialLinks.map(({ label, href, Icon }) => (
               <a
-                key={i}
-                href="#"
-                aria-label="Social link"
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
                 className="flex size-9 items-center justify-center rounded-full border border-secondary-foreground/20 transition-colors hover:bg-mango hover:text-primary-foreground"
               >
                 <Icon className="size-4" />
@@ -31,14 +61,15 @@ export function Footer() {
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-widest">Quick links</h3>
           <ul className="mt-4 space-y-2 text-sm text-secondary-foreground/70">
-            {["Home", "Varieties", "About", "Banner Builder"].map((l) => (
-              <li key={l}>
-                <a
-                  href={`#${l.toLowerCase().replace(/\s+/g, "-")}`}
+            {quickLinks.map((link) => (
+              <li key={link.label}>
+                <Link
+                  to={link.to}
+                  hash={link.hash}
                   className="transition-colors hover:text-mango"
                 >
-                  {l}
-                </a>
+                  {link.label}
+                </Link>
               </li>
             ))}
           </ul>
@@ -47,11 +78,15 @@ export function Footer() {
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-widest">Support</h3>
           <ul className="mt-4 space-y-2 text-sm text-secondary-foreground/70">
-            {["Shipping & returns", "Track order", "Wholesale", "FAQ"].map((l) => (
-              <li key={l}>
-                <a href="#" className="transition-colors hover:text-mango">
-                  {l}
-                </a>
+            {supportLinks.map((link) => (
+              <li key={link.label}>
+                <Link
+                  to={link.to}
+                  hash={link.hash}
+                  className="transition-colors hover:text-mango"
+                >
+                  {link.label}
+                </Link>
               </li>
             ))}
           </ul>

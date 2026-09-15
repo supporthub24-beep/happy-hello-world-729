@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { Signal } from "lucide-react";
 
 const footerLinks = [
   { label: "কল সেন্টার সার্ভিস", href: "https://itfair.bd/call-center" },
@@ -18,15 +17,17 @@ export function Footer() {
         <Link
           to="/"
           hash="top"
-          className="group flex items-center gap-2.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ippbx-navy"
-          aria-label="ITFair হোমপেজে ফিরে যান"
+          className="group flex items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ippbx-navy"
+          aria-label="Hello World হোমপেজে ফিরে যান"
         >
-          <span className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-ippbx-blue to-ippbx-violet shadow-lg shadow-ippbx-blue/30 transition-transform duration-300 group-hover:scale-105">
-            <Signal className="h-5 w-5 text-white" aria-hidden="true" />
-          </span>
+          <img
+            src="/generated/f802737f-026-hello-world-footer-logo.png"
+            alt="Hello World লোগো"
+            className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105 sm:h-12"
+          />
           <span className="flex flex-col leading-none">
             <span className="font-display text-xl font-bold tracking-tight text-foreground">
-              ITFair
+              Hello World
             </span>
             <span className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
               Authorized Reseller · Bangladesh
@@ -52,7 +53,7 @@ export function Footer() {
         </nav>
 
         <p className="text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
-          © 2026 ITFair — Lovable Pro Plan Authorized Reseller. সকল অধিকার সংরক্ষিত।
+          © 2026 Hello World — Lovable Pro Plan Authorized Reseller. সকল অধিকার সংরক্ষিত।
         </p>
       </div>
     </footer>
