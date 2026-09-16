@@ -41,11 +41,11 @@ export function Navbar() {
         <Link
           to="/"
           className="group flex items-center gap-2.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ippbx-navy"
-          aria-label="Hello World হোমপেজ"
+          aria-label="GuardStone হোমপেজ"
         >
           <img
-            src="/generated/38e2b97b-ef2-hello-world-logo.png"
-            alt="Hello World লোগো"
+            src="/generated/guardstone-logo.png"
+            alt="GuardStone লোগো"
             width={40}
             height={40}
             decoding="async"
@@ -53,7 +53,7 @@ export function Navbar() {
           />
           <span className="flex flex-col leading-none">
             <span className="font-display text-xl font-bold tracking-tight text-foreground">
-              Hello World
+              GuardStone
             </span>
             <span className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
               Authorized BD
@@ -98,7 +98,7 @@ export function Navbar() {
             className="group inline-flex items-center gap-2 rounded-full border border-ippbx-border px-3 py-1.5 text-sm font-semibold text-foreground transition-colors hover:border-ippbx-blue hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
           >
             <img
-              src="/generated/38e2b97b-ef2-hello-world-logo.png"
+              src="/generated/guardstone-logo.png"
               alt="সাপোর্ট"
               width={28}
               height={28}
@@ -169,7 +169,7 @@ export function Navbar() {
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-ippbx-border px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:border-ippbx-blue hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
               >
                 <img
-                  src="/generated/38e2b97b-ef2-hello-world-logo.png"
+                  src="/generated/guardstone-logo.png"
                   alt="সাপোর্ট"
                   width={28}
                   height={28}

@@ -18,11 +18,11 @@ export function Footer() {
           to="/"
           hash="top"
           className="group flex items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ippbx-navy"
-          aria-label="Hello World হোমপেজে ফিরে যান"
+          aria-label="GuardStone হোমপেজে ফিরে যান"
         >
           <img
-            src="/generated/06aa7253-10a-hello-world-logo.png"
-            alt="Hello World লোগো"
+            src="/generated/guardstone-logo.png"
+            alt="GuardStone লোগো"
             width={48}
             height={48}
             loading="lazy"
@@ -31,7 +31,7 @@ export function Footer() {
           />
           <span className="flex flex-col leading-none">
             <span className="font-display text-xl font-bold tracking-tight text-foreground">
-              Hello World
+              GuardStone
             </span>
             <span className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
               Authorized Reseller · Bangladesh
@@ -57,7 +57,7 @@ export function Footer() {
         </nav>
 
         <p className="text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
-          © 2026 Hello World — Lovable Pro Plan Authorized Reseller. সকল অধিকার সংরক্ষিত।
+          © 2026 GuardStone — Lovable Pro Plan Authorized Reseller. সকল অধিকার সংরক্ষিত।
         </p>
       </div>
     </footer>
