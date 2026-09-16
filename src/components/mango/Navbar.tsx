@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, ShoppingCart, X } from "lucide-react";
 import { useCart } from "@/lib/cart";
+import brandLogo from "@/assets/guardstone-logo.png.asset.json";
 
 const links = [
   { label: "Home", hash: "home" },
@@ -34,8 +35,8 @@ export function Navbar() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
         <Link to="/" hash="home" className="flex items-center gap-2 group">
           <img
-            src="/generated/38e2b97b-ef2-hello-world-logo.png"
-            alt="Hello World লোগো"
+            src={brandLogo.url}
+            alt="GuardStone লোগো"
             width={36}
             height={36}
             decoding="async"
