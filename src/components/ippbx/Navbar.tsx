@@ -44,12 +44,12 @@ export function Navbar() {
           aria-label="GuardStone হোমপেজ"
         >
           <img
-            src="/generated/brand-logo.png"
-            alt="GuardStone লোগো"
+            src="/generated/guardstone-logo.png"
+            alt="GuardStone ব্র্যান্ড লোগো"
             width={40}
             height={40}
             decoding="async"
-            className="h-10 w-10 rounded-xl object-contain transition-transform duration-300 group-hover:scale-105"
+            className="h-9 w-9 rounded-xl object-contain transition-transform duration-300 group-hover:scale-105 sm:h-10 sm:w-10"
           />
           <span className="flex flex-col leading-none">
             <span className="font-display text-xl font-bold tracking-tight text-foreground">
@@ -98,7 +98,7 @@ export function Navbar() {
             className="group inline-flex items-center gap-2 rounded-full border border-ippbx-border px-3 py-1.5 text-sm font-semibold text-foreground transition-colors hover:border-ippbx-blue hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
           >
             <img
-              src="/generated/brand-logo.png"
+              src="/generated/guardstone-logo.png"
               alt="সাপোর্ট"
               width={28}
               height={28}
@@ -169,7 +169,7 @@ export function Navbar() {
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-ippbx-border px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:border-ippbx-blue hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
               >
                 <img
-                  src="/generated/brand-logo.png"
+                  src="/generated/guardstone-logo.png"
                   alt="সাপোর্ট"
                   width={28}
                   height={28}
