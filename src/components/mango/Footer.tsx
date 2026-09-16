@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
+import brandLogo from "@/assets/guardstone-logo.png.asset.json";
 
 const socialLinks = [
   { label: "Instagram", href: "https://instagram.com", Icon: Instagram },
@@ -33,8 +34,8 @@ export function Footer() {
             className="group inline-flex items-center gap-2.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mango focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
           >
             <img
-              src="/generated/f802737f-026-hello-world-footer-logo.png"
-              alt="Hello World লোগো"
+              src={brandLogo.url}
+              alt="GuardStone লোগো"
               className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105 sm:h-12"
             />
             <span className="font-display text-xl font-semibold">Hello World</span>
