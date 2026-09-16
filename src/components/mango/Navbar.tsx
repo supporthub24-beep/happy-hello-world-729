@@ -1,6 +1,6 @@
- import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Citrus, Menu, ShoppingCart, X } from "lucide-react";
+import { Menu, ShoppingCart, X } from "lucide-react";
 import { useCart } from "@/lib/cart";
 
 const links = [
@@ -33,9 +33,14 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
         <Link to="/" hash="home" className="flex items-center gap-2 group">
-          <span className="flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-mango/90 via-mango-bright/80 to-mango-deep/90 shadow-lg shadow-mango/20 text-white transition-transform duration-300 group-hover:scale-110 backdrop-blur-sm border border-white/30">
-            <Citrus className="size-5 drop-shadow-sm" />
-          </span>
+          <img
+            src="/generated/38e2b97b-ef2-hello-world-logo.png"
+            alt="Hello World লোগো"
+            width={36}
+            height={36}
+            decoding="async"
+            className="size-9 rounded-full object-contain shadow-lg shadow-mango/20 transition-transform duration-300 group-hover:scale-110"
+          />
           <span className="font-display text-xl font-semibold tracking-tight text-foreground drop-shadow-sm">
             Mango Fresh
           </span>

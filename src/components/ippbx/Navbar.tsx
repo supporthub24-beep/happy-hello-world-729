@@ -44,7 +44,7 @@ export function Navbar() {
           aria-label="Hello World হোমপেজ"
         >
           <img
-            src="/generated/06aa7253-10a-hello-world-logo.png"
+            src="/generated/38e2b97b-ef2-hello-world-logo.png"
             alt="Hello World লোগো"
             width={40}
             height={40}
@@ -98,7 +98,7 @@ export function Navbar() {
             className="group inline-flex items-center gap-2 rounded-full border border-ippbx-border px-3 py-1.5 text-sm font-semibold text-foreground transition-colors hover:border-ippbx-blue hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
           >
             <img
-              src="/generated/06aa7253-10a-hello-world-logo.png"
+              src="/generated/38e2b97b-ef2-hello-world-logo.png"
               alt="সাপোর্ট"
               width={28}
               height={28}
@@ -169,7 +169,7 @@ export function Navbar() {
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-ippbx-border px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:border-ippbx-blue hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
               >
                 <img
-                  src="/generated/06aa7253-10a-hello-world-logo.png"
+                  src="/generated/38e2b97b-ef2-hello-world-logo.png"
                   alt="সাপোর্ট"
                   width={28}
                   height={28}
