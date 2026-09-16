@@ -1,0 +1,17 @@
+I can't emit `public/generated/brand-logo.png` as text — it's a binary PNG, and the uploaded image bytes aren't available to me in this context. Writing any text content to that path would produce a corrupt file, not your logo.
+
+Two things are also inconsistent in the task as given, and I want to flag them rather than guess:
+
+1. **The sibling files already reference `/generated/guardstone-logo.png`**, not `/generated/brand-logo.png`. The "final contents" for `src/routes/index.tsx`, `src/components/ippbx/Navbar.tsx`, and `src/components/ippbx/Footer.tsx` all point at `guardstone-logo.png`, and the image audit lists `public/generated/3d7e44ea-d49-hello-world-support-logo.png` etc. as existing but unreferenced. If I write `brand-logo.png`, the navbar/footer/favicon will 404 unless those three files are also rewritten to point at it.
+
+2. **The brand name is inconsistent.** The verified product name is "Hello World", but the sibling files render "GuardStone" as the wordmark and alt text. I won't silently pick one.
+
+To finish this correctly I need one decision from you:
+
+**Which filename should the uploaded logo live at?**
+- **A)** `public/generated/guardstone-logo.png` — matches what the navbar, footer, and favicon already reference, so no other file needs to change.
+- **B)** `public/generated/brand-logo.png` — as the plan states, but then I must also update the `src`/`href` values in `Navbar.tsx`, `Footer.tsx`, and `index.tsx` to match.
+
+And confirm the wordmark text to render next to the mark: **"GuardStone"** (as currently in the code) or **"Hello World"** (the verified product name)?
+
+Once you answer, the code side is a small, safe change I can deliver in full. The binary itself has to be committed as a real file — I can't fabricate PNG bytes for an image I can't read.
