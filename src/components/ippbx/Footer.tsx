@@ -21,8 +21,12 @@ export function Footer() {
           aria-label="Hello World হোমপেজে ফিরে যান"
         >
           <img
-            src="/generated/f802737f-026-hello-world-footer-logo.png"
+            src="/generated/06aa7253-10a-hello-world-logo.png"
             alt="Hello World লোগো"
+            width={48}
+            height={48}
+            loading="lazy"
+            decoding="async"
             className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105 sm:h-12"
           />
           <span className="flex flex-col leading-none">
