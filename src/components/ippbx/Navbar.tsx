@@ -44,7 +44,7 @@ export function Navbar() {
           aria-label="GuardStone হোমপেজ"
         >
           <img
-            src="/generated/guardstone-logo.png"
+            src="/generated/5731b571-50b-download.png"
             alt="GuardStone ব্র্যান্ড লোগো"
             width={40}
             height={40}
@@ -98,7 +98,7 @@ export function Navbar() {
             className="group inline-flex items-center gap-2 rounded-full border border-ippbx-border px-3 py-1.5 text-sm font-semibold text-foreground transition-colors hover:border-ippbx-blue hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
           >
             <img
-              src="/generated/guardstone-logo.png"
+              src="/generated/5731b571-50b-download.png"
               alt="সাপোর্ট"
               width={28}
               height={28}
@@ -169,7 +169,7 @@ export function Navbar() {
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-ippbx-border px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:border-ippbx-blue hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
               >
                 <img
-                  src="/generated/guardstone-logo.png"
+                  src="/generated/5731b571-50b-download.png"
                   alt="সাপোর্ট"
                   width={28}
                   height={28}

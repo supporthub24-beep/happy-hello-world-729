@@ -21,7 +21,7 @@ export function Footer() {
           aria-label="GuardStone হোমপেজে ফিরে যান"
         >
           <img
-            src="/generated/brand-logo.png"
+            src="/generated/5731b571-50b-download.png"
             alt="GuardStone লোগো"
             width={48}
             height={48}
