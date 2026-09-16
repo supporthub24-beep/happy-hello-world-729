@@ -1,3 +1,4 @@
+import { Flame, Timer, TrendingDown } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { VarietyCard, type Variety } from "./VarietyCard";
 import alphonso from "@/assets/mango-alphonso.jpg";
@@ -59,6 +60,12 @@ const varieties: Variety[] = [
   },
 ];
 
+const urgency = [
+  { icon: Flame, label: "সীমিত স্টক · আজই শেষ হতে পারে" },
+  { icon: Timer, label: "২৪ ঘণ্টায় ডেলিভারি ডিসপ্যাচ" },
+  { icon: TrendingDown, label: "রিটেইলের চেয়ে ৩০% পর্যন্ত কম দাম" },
+];
+
 export function Varieties() {
   return (
     <section id="varieties" className="py-20 md:py-28">
@@ -74,6 +81,26 @@ export function Varieties() {
             <p className="mt-3 text-secondary/90 font-medium drop-shadow-sm">
               প্রতি বাক্স হাতে বাছাই করা এবং গাছ ছাড়ার দিনই প্যাক করা হয়
             </p>
+
+            <div className="mt-5 flex flex-wrap gap-2">
+              {urgency.map((u) => (
+                <span
+                  key={u.label}
+                  className="inline-flex items-center gap-2 rounded-full border border-mango/40 bg-mango/10 px-4 py-2 text-xs font-semibold text-mango-deep shadow-sm backdrop-blur-sm"
+                >
+                  <u.icon className="size-4" aria-hidden="true" />
+                  {u.label}
+                </span>
+              ))}
+            </div>
+
+            <a
+              href="#banner-builder"
+              className="group mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-mango to-mango-deep px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-[0_8px_32px_rgba(255,140,0,0.45)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(255,140,0,0.6)]"
+            >
+              স্টক শেষ হওয়ার আগেই অর্ডার করুন
+              <Flame className="size-4 transition-transform group-hover:scale-110" aria-hidden="true" />
+            </a>
           </div>
         </Reveal>
 

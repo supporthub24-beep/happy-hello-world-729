@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight, Leaf, Star, Truck } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Flame, Leaf, Star, Timer, Truck } from "lucide-react";
 import { ResponsiveImage } from "./ResponsiveImage";
 import freshHarvest from "@/assets/banner-fresh-harvest.jpg";
 import premium from "@/assets/banner-premium.jpg";
@@ -28,9 +28,10 @@ const slides: Slide[] = [
     eyebrow: "Fresh Harvest · তাজা ফলন",
     titleBn: "আমের রাজ্যে স্বাগতম",
     title: "Nature's Sweetest Gift",
-    subtitle: "Hand-picked at sunrise, shipped within 24 hours — no carbide, no cold storage.",
+    subtitle:
+      "সূর্য ওঠার সাথে সাথে হাতে তোলা, ২৪ ঘণ্টার মধ্যে ডেলিভারি — কার্বাইড নেই, কোল্ড স্টোরেজ নেই। একবার খেলে আর ভুলবেন না।",
     cta: "এখনই অর্ডার করুন",
-    overlay: "from-[#1A1200]/90 via-[#1A1200]/65 to-[#1A1200]/20",
+    overlay: "from-[#1A1200]/95 via-[#1A1200]/70 to-[#1A1200]/25",
   },
   {
     id: "premium",
@@ -40,9 +41,10 @@ const slides: Slide[] = [
     eyebrow: "Premium Selection · প্রিমিয়াম",
     titleBn: "রাজকীয় স্বাদ, প্রতিটি কামড়ে",
     title: "Crafted by the Orchard",
-    subtitle: "Single-estate fruit, graded by hand and packed in cushioned crates.",
+    subtitle:
+      "সিঙ্গেল-এস্টেট ফল, হাতে গ্রেড করা এবং কুশনড ক্রেটে প্যাক করা। সীমিত স্টক — শেষ হওয়ার আগেই নিন।",
     cta: "প্রিমিয়াম দেখুন",
-    overlay: "from-[#08110A]/95 via-[#08110A]/70 to-[#08110A]/20",
+    overlay: "from-[#08110A]/95 via-[#08110A]/75 to-[#08110A]/25",
   },
   {
     id: "seasonal",
@@ -52,10 +54,11 @@ const slides: Slide[] = [
     eyebrow: "Seasonal Offer · মৌসুমি অফার",
     titleBn: "৳৩০০ ছাড়!",
     title: "Season Sale Is Live",
-    subtitle: "Mix any three varieties and save on every crate this week only.",
+    subtitle:
+      "যেকোনো তিনটি জাত মিক্স করুন এবং প্রতিটি ক্রেটে সেভ করুন — শুধু এই সপ্তাহে, স্টক শেষ হওয়ার আগেই।",
     cta: "অফার লুফে নিন",
     badge: "৳৩০০ ছাড়!",
-    overlay: "from-[#2A1200]/90 via-[#2A1200]/60 to-[#2A1200]/15",
+    overlay: "from-[#2A1200]/95 via-[#2A1200]/65 to-[#2A1200]/20",
   },
 ];
 
@@ -74,19 +77,19 @@ export function Hero() {
   return (
     <section id="home" className="relative overflow-hidden px-3 pt-24 md:pt-28">
       {/* Liquid glass ambient glow */}
-      <div className="absolute left-1/4 top-20 h-96 w-96 -translate-x-1/2 rounded-full bg-mango/20 blur-[128px]" />
-      <div className="absolute right-1/4 top-40 h-64 w-64 translate-x-1/2 rounded-full bg-mango/15 blur-[96px]" />
-      
+      <div className="absolute left-1/4 top-20 h-96 w-96 -translate-x-1/2 rounded-full bg-mango/25 blur-[128px]" />
+      <div className="absolute right-1/4 top-40 h-64 w-64 translate-x-1/2 rounded-full bg-mango/20 blur-[96px]" />
+
       <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] md:rounded-[3.5rem]">
         {/* Liquid glass border effect - outer glass frame */}
         <div className="absolute inset-0 z-20 rounded-[2.5rem] md:rounded-[3.5rem] border border-white/20 bg-gradient-to-br from-white/40 via-white/10 to-white/30 p-[1px] md:rounded-[3.5rem] backdrop-blur-[2px]">
           <div className="size-full rounded-[2.5rem] md:rounded-[3.5rem] bg-gradient-to-br from-white/10 via-transparent to-white/20" />
         </div>
-        
+
         {/* Liquid glass edge highlight */}
         <div className="absolute inset-[1px] z-30 rounded-[2.5rem] md:rounded-[3.5rem] bg-gradient-to-br from-white/60 via-transparent to-transparent pointer-events-none" />
         <div className="absolute inset-[1px] z-30 rounded-[2.5rem] md:rounded-[3.5rem] bg-gradient-to-tl from-white/30 via-transparent to-transparent pointer-events-none" />
-        
+
         <div className="relative h-[560px] w-full md:h-[620px]">
           {slides.map((s, i) => (
             <div
@@ -119,7 +122,8 @@ export function Hero() {
                   </span>
 
                   {s.badge && (
-                    <span className="ml-2 inline-flex rounded-full bg-gradient-to-r from-mango to-mango/80 px-4 py-1.5 text-xs font-bold text-primary-foreground shadow-[0_4px_16px_rgba(255,140,0,0.4)] backdrop-blur-sm">
+                    <span className="ml-2 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-mango to-mango/80 px-4 py-1.5 text-xs font-bold text-primary-foreground shadow-[0_4px_16px_rgba(255,140,0,0.5)] backdrop-blur-sm">
+                      <Flame className="size-3.5" aria-hidden="true" />
                       {s.badge}
                     </span>
                   )}
@@ -137,7 +141,7 @@ export function Hero() {
                     {/* Liquid glass CTA button */}
                     <a
                       href="#varieties"
-                      className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-mango px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_8px_32px_rgba(255,140,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(255,140,0,0.5)] backdrop-blur-xl border border-mango/40"
+                      className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-mango px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_8px_32px_rgba(255,140,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(255,140,0,0.6)] backdrop-blur-xl border border-mango/40"
                     >
                       <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                       {s.cta}
@@ -155,12 +159,16 @@ export function Hero() {
                   {/* Liquid glass info badges */}
                   <div className="mt-9 flex flex-wrap gap-3 text-sm text-primary-foreground">
                     <div className="flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-2 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] backdrop-blur-md">
-                      <Star className="size-4 fill-mango text-mango" /> 
+                      <Star className="size-4 fill-mango text-mango" />
                       <span className="font-medium">৪.৯ Rating · ২,৪০০+ অর্ডার</span>
                     </div>
                     <div className="flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-2 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] backdrop-blur-md">
-                      <Truck className="size-4 fill-mango text-mango" /> 
+                      <Truck className="size-4 fill-mango text-mango" />
                       <span className="font-medium">১৫০০+ টাকায় ফ্রি ডেলিভারি</span>
+                    </div>
+                    <div className="flex items-center gap-2 rounded-full border border-mango/50 bg-mango/25 px-4 py-2 shadow-[inset_0_1px_1px_rgba(255,255,255,0.25)] backdrop-blur-md">
+                      <Timer className="size-4 text-mango" />
+                      <span className="font-semibold text-mango">সীমিত স্টক · আজই অর্ডার করুন</span>
                     </div>
                   </div>
                 </div>

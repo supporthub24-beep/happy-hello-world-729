@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, ShoppingCart, X } from "lucide-react";
+import { Flame, Menu, ShoppingCart, Timer, X } from "lucide-react";
 import { useCart } from "@/lib/cart";
 import brandLogo from "@/assets/guardstone-logo.png.asset.json";
 
@@ -27,11 +27,24 @@ export function Navbar() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled 
-          ? "bg-white/20 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.3)] backdrop-blur-[20px] border-b border-white/30" 
+        scrolled
+          ? "bg-white/20 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.3)] backdrop-blur-[20px] border-b border-white/30"
           : "bg-gradient-to-b from-white/25 via-white/15 to-transparent backdrop-blur-[16px]"
       }`}
     >
+      {/* Urgency strip */}
+      <div className="bg-gradient-to-r from-mango-deep via-mango to-mango-deep px-4 py-1.5 text-center text-[11px] font-bold uppercase tracking-widest text-primary-foreground shadow-[0_4px_16px_rgba(255,140,0,0.4)] sm:text-xs">
+        <span className="inline-flex items-center gap-2">
+          <Flame className="size-3.5 animate-pulse" aria-hidden="true" />
+          সীমিত স্টক · আজই শেষ হতে পারে
+          <span className="hidden sm:inline">·</span>
+          <span className="hidden items-center gap-1.5 sm:inline-flex">
+            <Timer className="size-3.5" aria-hidden="true" />
+            ২৪ ঘণ্টায় ডেলিভারি ডিসপ্যাচ
+          </span>
+        </span>
+      </div>
+
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
         <Link to="/" hash="home" className="flex items-center gap-2 group">
           <img
@@ -79,9 +92,12 @@ export function Navbar() {
           <Link
             to="/"
             hash="varieties"
-            className="hidden rounded-full bg-gradient-to-r from-secondary/90 via-secondary/85 to-secondary/80 px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-secondary/20 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-secondary/30 md:inline-block relative overflow-hidden group border border-white/30"
+            className="hidden rounded-full bg-gradient-to-r from-mango to-mango-deep px-6 py-2.5 text-sm font-bold text-primary-foreground shadow-[0_8px_32px_rgba(255,140,0,0.5)] backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_40px_rgba(255,140,0,0.65)] md:inline-flex md:items-center md:gap-2 relative overflow-hidden group border border-mango/40"
           >
-            <span className="relative z-10 drop-shadow-sm">Order Now</span>
+            <span className="relative z-10 inline-flex items-center gap-2 drop-shadow-sm">
+              <Flame className="size-4 transition-transform duration-300 group-hover:scale-125" aria-hidden="true" />
+              Order Now
+            </span>
             <span className="absolute inset-0 bg-gradient-to-r from-white/25 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </Link>
 
@@ -124,8 +140,9 @@ export function Navbar() {
                 to="/"
                 hash="varieties"
                 onClick={() => setOpen(false)}
-                className="block w-full rounded-full bg-gradient-to-r from-secondary/90 to-secondary/80 py-3 text-center text-sm font-bold text-white shadow-lg border border-white/30 backdrop-blur-sm"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-mango to-mango-deep py-3 text-center text-sm font-bold text-primary-foreground shadow-[0_8px_32px_rgba(255,140,0,0.5)] border border-mango/40 backdrop-blur-sm"
               >
+                <Flame className="size-4" aria-hidden="true" />
                 Order Now
               </Link>
             </li>

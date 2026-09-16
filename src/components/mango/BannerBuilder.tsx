@@ -1,5 +1,5 @@
  import { useRef, useState } from "react";
-import { Download, ImagePlus, Sparkles } from "lucide-react";
+import { Download, Flame, ImagePlus, Sparkles, Timer, Zap } from "lucide-react";
 import { toast } from "sonner";
 import { Reveal } from "./Reveal";
 import heroMangoes from "@/assets/hero-mangoes.jpg";
@@ -40,8 +40,8 @@ const gallery = [
 
 export function BannerBuilder() {
   const [template, setTemplate] = useState<TemplateId>("split");
-  const [headline, setHeadline] = useState("Mango Season Is Here");
-  const [subtext, setSubtext] = useState("Farm-fresh Alphonso · 20% off this week only");
+  const [headline, setHeadline] = useState("Mango Season Is Here — Grab Yours");
+  const [subtext, setSubtext] = useState("Farm-fresh Alphonso · 20% off this week only · Stock is running out");
   const [themeId, setThemeId] = useState("sunrise");
   const [image, setImage] = useState<string>(heroMangoes);
   const [busy, setBusy] = useState(false);
@@ -105,12 +105,26 @@ export function BannerBuilder() {
               <Sparkles className="size-4" /> Banner Builder
             </p>
             <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-secondary md:text-4xl">
-              Design your own mango promo banner
+              Design a banner that stops the scroll — and sells out your stock
             </h2>
             <p className="mt-3 text-muted-foreground">
-              Pick a layout, write your copy, choose a palette and export a print-ready PNG — all in
-              your browser.
+              Pick a layout, write copy that converts, choose a palette and export a print-ready
+              banner — all in your browser, in under a minute.
             </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              <span className="inline-flex items-center gap-2 rounded-full border border-mango/40 bg-mango/10 px-4 py-2 text-xs font-semibold text-mango-deep shadow-sm backdrop-blur-sm">
+                <Zap className="size-4" aria-hidden="true" />
+                ৬০ সেকেন্ডে রেডি
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-mango/40 bg-mango/10 px-4 py-2 text-xs font-semibold text-mango-deep shadow-sm backdrop-blur-sm">
+                <Timer className="size-4" aria-hidden="true" />
+                ১৯২০ × ১০৮০ এক্সপোর্ট
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-mango/40 bg-mango/10 px-4 py-2 text-xs font-semibold text-mango-deep shadow-sm backdrop-blur-sm">
+                <Flame className="size-4" aria-hidden="true" />
+                সীমিত স্টক · আজই শেষ হতে পারে
+              </span>
+            </div>
           </div>
         </Reveal>
 
@@ -229,10 +243,10 @@ export function BannerBuilder() {
             <button
               onClick={download}
               disabled={busy}
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-secondary px-6 py-3.5 text-sm font-semibold text-secondary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-60"
+              className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-mango to-mango-deep px-6 py-3.5 text-sm font-bold text-primary-foreground shadow-[0_8px_32px_rgba(255,140,0,0.45)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(255,140,0,0.6)] disabled:opacity-60"
             >
-              <Download className="size-4" />
-              {busy ? "Exporting…" : "Download Banner"}
+              <Download className="size-4 transition-transform group-hover:scale-110" />
+              {busy ? "Exporting…" : "Download Banner Now"}
             </button>
           </div>
 
@@ -354,8 +368,9 @@ export function BannerBuilder() {
                 )}
               </div>
             </div>
-            <p className="mt-3 text-xs text-muted-foreground">
-              Exports as a 1920 × 1080 WebP, ready for social posts or print.
+            <p className="mt-3 text-xs font-medium text-muted-foreground">
+              Exports as a 1920 × 1080 WebP, ready for social posts or print — download it and post
+              it before the season sells out.
             </p>
           </div>
         </div>
