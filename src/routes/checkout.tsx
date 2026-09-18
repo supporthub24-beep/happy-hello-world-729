@@ -5,6 +5,7 @@ import { Navbar } from "@/components/mango/Navbar";
 import { Footer } from "@/components/mango/Footer";
 import { formatBDT, useCart } from "@/lib/cart";
 import { DELIVERY_FEE, FREE_DELIVERY_OVER } from "./cart";
+import { isSupabaseConfigured } from "@/lib/supabase";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
@@ -46,6 +47,12 @@ function CheckoutPage() {
       toast.error("Your cart is empty");
       return;
     }
+    if (!isSupabaseConfigured) {
+      toast.error(
+        "Supabase কনফিগার করা নেই। VITE_SUPABASE_URL এবং VITE_SUPABASE_ANON_KEY সেট করুন।",
+      );
+      return;
+    }
     const form = new FormData(e.currentTarget);
     if (method === "bkash" && !String(form.get("trxId") ?? "").trim()) {
       toast.error("bKash Transaction ID দিন");
@@ -83,6 +90,20 @@ function CheckoutPage() {
         <h1 className="font-display text-3xl font-semibold tracking-tight text-secondary md:text-4xl">
           Checkout <span className="text-lg font-normal text-muted-foreground">চেকআউট</span>
         </h1>
+
+        {!isSupabaseConfigured ? (
+          <div
+            role="alert"
+            className="mt-6 rounded-2xl border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive"
+          >
+            <p className="font-semibold">Supabase কনফিগার করা নেই</p>
+            <p className="mt-1">
+              <code className="font-mono text-xs">VITE_SUPABASE_URL</code> এবং{" "}
+              <code className="font-mono text-xs">VITE_SUPABASE_ANON_KEY</code> সেট করার পর
+              অর্ডার নিশ্চিত করা যাবে।
+            </p>
+          </div>
+        ) : null}
 
         {items.length === 0 ? (
           <div className="mt-10 rounded-3xl border border-border bg-card p-12 text-center">
@@ -217,8 +238,15 @@ function CheckoutPage() {
               </dl>
               <button
                 type="submit"
-                disabled={submitting}
+                disabled={submitting || !isSupabaseConfigured}
                 onClick={(e) => {
+                  if (!isSupabaseConfigured) {
+                    e.preventDefault();
+                    toast.error(
+                      "Supabase কনফিগার করা নেই। VITE_SUPABASE_URL এবং VITE_SUPABASE_ANON_KEY সেট করুন।",
+                    );
+                    return;
+                  }
                   if (method === "bank") {
                     e.preventDefault();
                     setShowBankModal(true);

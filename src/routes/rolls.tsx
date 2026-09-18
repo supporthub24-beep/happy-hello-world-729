@@ -131,10 +131,10 @@ function RollsPage() {
   });
 
   useEffect(() => {
-    if (!authLoading && !user) {
+    if (!authLoading && !user && configured) {
       void navigate({ to: "/login" });
     }
-  }, [authLoading, user, navigate]);
+  }, [authLoading, user, configured, navigate]);
 
   useEffect(() => {
     if (!user || !configured) {
@@ -255,7 +255,7 @@ function RollsPage() {
     }
   }
 
-  if (authLoading || (!user && !error)) {
+  if (authLoading || (configured && !user && !error)) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
         <Loader2 className="h-6 w-6 animate-spin text-primary" aria-hidden="true" />

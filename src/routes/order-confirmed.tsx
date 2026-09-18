@@ -1,4 +1,4 @@
- import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CheckCircle2, Package, Truck, CheckCheck } from "lucide-react";
 import { Navbar } from "@/components/mango/Navbar";
@@ -30,7 +30,7 @@ type Order = {
   name: string;
   phone: string;
   address: string;
-  method: "cod" | "bkash";
+  method: "cod" | "bkash" | "bank";
   trxId?: string;
   total: number;
   items: { name: string; qty: number; price: number }[];
@@ -90,7 +90,11 @@ function OrderConfirmedPage() {
                 <span className="text-mango-deep">{formatBDT(order.total)}</span>
               </div>
               <p className="mt-3 text-muted-foreground">
-                {order.method === "cod" ? "Cash on Delivery" : `bKash — TrxID ${order.trxId}`}
+                {order.method === "cod"
+                  ? "Cash on Delivery"
+                  : order.method === "bkash"
+                    ? `bKash — TrxID ${order.trxId}`
+                    : `Bank Transfer — Ref ${order.trxId}`}
               </p>
               <p className="mt-1 text-muted-foreground">
                 {order.name} · {order.phone}

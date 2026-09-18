@@ -34,6 +34,9 @@ type AuthContextValue = {
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
+const NOT_CONFIGURED_MESSAGE =
+  "Supabase কনফিগার করা নেই। VITE_SUPABASE_URL এবং VITE_SUPABASE_ANON_KEY সেট করুন।";
+
 function fallbackName(user: User | null): string {
   if (!user) return "";
   const meta = (user.user_metadata ?? {}) as Record<string, unknown>;
@@ -61,6 +64,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .then(({ data }) => {
         if (!active) return;
         setSession(data.session ?? null);
+      })
+      .catch(() => {
+        if (active) setSession(null);
       })
       .finally(() => {
         if (active) setLoading(false);
@@ -106,6 +112,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             email: user.email ?? "",
           });
         }
+      })
+      .catch(() => {
+        if (!active) return;
+        setProfile({
+          id: user.id,
+          full_name: fallbackName(user),
+          email: user.email ?? "",
+        });
       });
 
     return () => {
@@ -115,36 +129,46 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signIn = useCallback(async (email: string, password: string) => {
     if (!isSupabaseConfigured) {
+      return { error: NOT_CONFIGURED_MESSAGE };
+    }
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      return { error: error ? error.message : null };
+    } catch (cause) {
       return {
-        error:
-          "Supabase কনফিগার করা নেই। VITE_SUPABASE_URL এবং VITE_SUPABASE_ANON_KEY সেট করুন।",
+        error: cause instanceof Error ? cause.message : NOT_CONFIGURED_MESSAGE,
       };
     }
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    return { error: error ? error.message : null };
   }, []);
 
   const signUp = useCallback(
     async (email: string, password: string, fullName: string) => {
       if (!isSupabaseConfigured) {
+        return { error: NOT_CONFIGURED_MESSAGE };
+      }
+      try {
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: { data: { full_name: fullName } },
+        });
+        return { error: error ? error.message : null };
+      } catch (cause) {
         return {
-          error:
-            "Supabase কনফিগার করা নেই। VITE_SUPABASE_URL এবং VITE_SUPABASE_ANON_KEY সেট করুন।",
+          error: cause instanceof Error ? cause.message : NOT_CONFIGURED_MESSAGE,
         };
       }
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: { data: { full_name: fullName } },
-      });
-      return { error: error ? error.message : null };
     },
     [],
   );
 
   const signOut = useCallback(async () => {
     if (!isSupabaseConfigured) return;
-    await supabase.auth.signOut();
+    try {
+      await supabase.auth.signOut();
+    } catch {
+      /* ignore — signing out locally is still safe */
+    }
     setProfile(null);
   }, []);
 

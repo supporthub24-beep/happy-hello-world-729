@@ -88,6 +88,7 @@ function DashboardPage() {
   useEffect(() => {
     if (!user || !configured) {
       setLoading(false);
+      setError(null);
       return;
     }
 

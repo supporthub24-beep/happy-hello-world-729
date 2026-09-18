@@ -1,10 +1,13 @@
-import { supabase } from "@/lib/supabase";
+import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 
 export type Direction = "in" | "out";
 
 export type RollType = "BOPP" | "CPP" | "PP";
 
 export const ROLL_TYPES: RollType[] = ["BOPP", "CPP", "PP"];
+
+export const SUPABASE_NOT_CONFIGURED_MESSAGE =
+  "Supabase কনফিগার করা নেই। VITE_SUPABASE_URL এবং VITE_SUPABASE_ANON_KEY সেট করুন।";
 
 export type FilmRollMovement = {
   id: string;
@@ -289,6 +292,10 @@ export function filterGranuleMovements(
 }
 
 export async function fetchFilmRollMovements(): Promise<FilmRollMovement[]> {
+  if (!isSupabaseConfigured) {
+    throw new Error(SUPABASE_NOT_CONFIGURED_MESSAGE);
+  }
+
   const { data, error } = await supabase
     .from("film_roll_movements")
     .select("*")
@@ -300,6 +307,10 @@ export async function fetchFilmRollMovements(): Promise<FilmRollMovement[]> {
 }
 
 export async function fetchGranuleMovements(): Promise<GranuleMovement[]> {
+  if (!isSupabaseConfigured) {
+    throw new Error(SUPABASE_NOT_CONFIGURED_MESSAGE);
+  }
+
   const { data, error } = await supabase
     .from("granule_movements")
     .select("*")
@@ -314,6 +325,10 @@ export async function createFilmRollMovement(
   input: FilmRollEntryInput,
   staff: { id: string | null; name: string },
 ): Promise<void> {
+  if (!isSupabaseConfigured) {
+    throw new Error(SUPABASE_NOT_CONFIGURED_MESSAGE);
+  }
+
   const { error } = await supabase.from("film_roll_movements").insert({
     direction: input.direction,
     roll_type: input.roll_type,
@@ -334,6 +349,10 @@ export async function createGranuleMovement(
   input: GranuleEntryInput,
   staff: { id: string | null; name: string },
 ): Promise<void> {
+  if (!isSupabaseConfigured) {
+    throw new Error(SUPABASE_NOT_CONFIGURED_MESSAGE);
+  }
+
   const { error } = await supabase.from("granule_movements").insert({
     direction: input.direction,
     grade: input.grade.trim(),
@@ -351,11 +370,19 @@ export async function createGranuleMovement(
 }
 
 export async function deleteFilmRollMovement(id: string): Promise<void> {
+  if (!isSupabaseConfigured) {
+    throw new Error(SUPABASE_NOT_CONFIGURED_MESSAGE);
+  }
+
   const { error } = await supabase.from("film_roll_movements").delete().eq("id", id);
   if (error) throw new Error(error.message);
 }
 
 export async function deleteGranuleMovement(id: string): Promise<void> {
+  if (!isSupabaseConfigured) {
+    throw new Error(SUPABASE_NOT_CONFIGURED_MESSAGE);
+  }
+
   const { error } = await supabase.from("granule_movements").delete().eq("id", id);
   if (error) throw new Error(error.message);
 }
