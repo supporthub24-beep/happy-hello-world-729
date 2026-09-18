@@ -40,9 +40,9 @@ const NOT_CONFIGURED_MESSAGE =
 function fallbackName(user: User | null): string {
   if (!user) return "";
   const meta = (user.user_metadata ?? {}) as Record<string, unknown>;
-  const metaName = typeof meta.full_name === "string" ? meta.full_name : "";
+  const metaName = typeof meta["full_name"] === "string" ? (meta["full_name"] as string) : "";
   if (metaName.trim()) return metaName.trim();
-  if (user.email) return user.email.split("@")[0];
+  if (user.email) return user.email.split("@")[0] ?? "Staff";
   return "Staff";
 }
 
