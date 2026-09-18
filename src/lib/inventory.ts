@@ -113,7 +113,7 @@ function normalizeFilmRoll(row: Record<string, unknown>): FilmRollMovement {
     notes: String(row["notes"] ?? ""),
     movement_date: String(row["movement_date"] ?? ""),
     created_by: (row["created_by"] as string | null) ?? null,
-    created_by_name: String(row["created_by"]_name ?? ""),
+    created_by_name: String(row["created_by_name"] ?? ""),
     created_at: String(row["created_at"] ?? ""),
     updated_at: String(row["updated_at"] ?? ""),
   };
@@ -131,7 +131,7 @@ function normalizeGranule(row: Record<string, unknown>): GranuleMovement {
     notes: String(row["notes"] ?? ""),
     movement_date: String(row["movement_date"] ?? ""),
     created_by: (row["created_by"] as string | null) ?? null,
-    created_by_name: String(row["created_by"]_name ?? ""),
+    created_by_name: String(row["created_by_name"] ?? ""),
     created_at: String(row["created_at"] ?? ""),
     updated_at: String(row["updated_at"] ?? ""),
   };
