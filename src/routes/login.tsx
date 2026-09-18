@@ -38,19 +38,12 @@ export const Route = createFileRoute("/login")({
 
 function LoginPage() {
   const navigate = useNavigate();
-  const { user, loading, configured, signIn, signUp } = useAuth();
+  const { user, loading, configured, signIn } = useAuth();
 
   const [signInEmail, setSignInEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
   const [signInError, setSignInError] = useState<string | null>(null);
   const [signInBusy, setSignInBusy] = useState(false);
-
-  const [signUpName, setSignUpName] = useState("");
-  const [signUpEmail, setSignUpEmail] = useState("");
-  const [signUpPassword, setSignUpPassword] = useState("");
-  const [signUpError, setSignUpError] = useState<string | null>(null);
-  const [signUpNotice, setSignUpNotice] = useState<string | null>(null);
-  const [signUpBusy, setSignUpBusy] = useState(false);
 
   useEffect(() => {
     if (!loading && user) {
@@ -69,25 +62,6 @@ function LoginPage() {
       return;
     }
     void navigate({ to: "/dashboard" });
-  }
-
-  async function handleSignUp(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSignUpError(null);
-    setSignUpNotice(null);
-    setSignUpBusy(true);
-    const { error } = await signUp(signUpEmail.trim(), signUpPassword, signUpName.trim());
-    setSignUpBusy(false);
-    if (error) {
-      setSignUpError(error);
-      return;
-    }
-    setSignUpNotice(
-      "অ্যাকাউন্ট তৈরি হয়েছে। ইমেইল ভেরিফিকেশন চালু থাকলে ইনবক্স কনফার্ম করে লগইন করুন।",
-    );
-    setSignUpName("");
-    setSignUpEmail("");
-    setSignUpPassword("");
   }
 
   return (
@@ -197,68 +171,17 @@ function LoginPage() {
                 </TabsContent>
 
                 <TabsContent value="signup" className="mt-6">
-                  <form onSubmit={handleSignUp} className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="signup-name">পূর্ণ নাম</Label>
-                      <Input
-                        id="signup-name"
-                        type="text"
-                        autoComplete="name"
-                        required
-                        value={signUpName}
-                        onChange={(event) => setSignUpName(event.target.value)}
-                        placeholder="স্টাফের নাম"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="signup-email">ইমেইল</Label>
-                      <Input
-                        id="signup-email"
-                        type="email"
-                        autoComplete="email"
-                        required
-                        value={signUpEmail}
-                        onChange={(event) => setSignUpEmail(event.target.value)}
-                        placeholder="staff@example.com"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="signup-password">পাসওয়ার্ড</Label>
-                      <Input
-                        id="signup-password"
-                        type="password"
-                        autoComplete="new-password"
-                        required
-                        minLength={6}
-                        value={signUpPassword}
-                        onChange={(event) => setSignUpPassword(event.target.value)}
-                        placeholder="কমপক্ষে ৬ অক্ষর"
-                      />
-                    </div>
-
-                    {signUpError ? (
-                      <Alert variant="destructive">
-                        <AlertTitle>সাইন আপ ব্যর্থ</AlertTitle>
-                        <AlertDescription>{signUpError}</AlertDescription>
-                      </Alert>
-                    ) : null}
-
-                    {signUpNotice ? (
-                      <Alert>
-                        <AlertTitle>সফল</AlertTitle>
-                        <AlertDescription>{signUpNotice}</AlertDescription>
-                      </Alert>
-                    ) : null}
-
-                    <Button type="submit" className="w-full" disabled={signUpBusy || !configured}>
-                      {signUpBusy ? (
-                        <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
-                      ) : (
+                  <div className="space-y-4">
+                    <p className="text-sm text-muted-foreground">
+                      নতুন স্টাফ অ্যাকাউন্ট তৈরি করতে রেজিস্টার পেজে যান।
+                    </p>
+                    <Button asChild className="w-full">
+                      <Link to="/register">
                         <UserPlus className="h-4 w-4" aria-hidden="true" />
-                      )}
-                      অ্যাকাউন্ট তৈরি করুন
+                        রেজিস্টার করুন
+                      </Link>
                     </Button>
-                  </form>
+                  </div>
                 </TabsContent>
               </Tabs>
             </CardContent>

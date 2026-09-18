@@ -1,4 +1,4 @@
- import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Navbar } from "@/components/mango/Navbar";
@@ -6,6 +6,7 @@ import { Footer } from "@/components/mango/Footer";
 import { formatBDT, useCart } from "@/lib/cart";
 import { DELIVERY_FEE, FREE_DELIVERY_OVER } from "./cart";
 import { isSupabaseConfigured } from "@/lib/supabase";
+import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
@@ -34,6 +35,7 @@ const inputClass =
 function CheckoutPage() {
   const { items, subtotal, clear } = useCart();
   const navigate = useNavigate();
+  const { user, loading: authLoading } = useAuth();
   const [method, setMethod] = useState<"cod" | "bkash" | "bank">("cod");
   const [submitting, setSubmitting] = useState(false);
   const [showBankModal, setShowBankModal] = useState(false);
@@ -41,8 +43,20 @@ function CheckoutPage() {
   const delivery = items.length === 0 || subtotal >= FREE_DELIVERY_OVER ? 0 : DELIVERY_FEE;
   const total = subtotal + delivery;
 
+  useEffect(() => {
+    if (!authLoading && !user) {
+      toast.error("অর্ডার করতে লগইন করুন");
+      void navigate({ to: "/login" });
+    }
+  }, [authLoading, user, navigate]);
+
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!user) {
+      toast.error("অর্ডার করতে লগইন করুন");
+      void navigate({ to: "/login" });
+      return;
+    }
     if (items.length === 0) {
       toast.error("Your cart is empty");
       return;
@@ -105,7 +119,23 @@ function CheckoutPage() {
           </div>
         ) : null}
 
-        {items.length === 0 ? (
+        {authLoading ? (
+          <div className="mt-10 rounded-3xl border border-border bg-card p-12 text-center">
+            <p className="text-muted-foreground">লোড হচ্ছে…</p>
+          </div>
+        ) : !user ? (
+          <div className="mt-10 rounded-3xl border border-border bg-card p-12 text-center">
+            <p className="text-muted-foreground">
+              অর্ডার সম্পন্ন করতে লগইন করুন — Please sign in to place your order.
+            </p>
+            <Link
+              to="/login"
+              className="mt-6 inline-block rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground"
+            >
+              লগইন করুন
+            </Link>
+          </div>
+        ) : items.length === 0 ? (
           <div className="mt-10 rounded-3xl border border-border bg-card p-12 text-center">
             <p className="text-muted-foreground">Your cart is empty — কার্ট খালি।</p>
             <Link
@@ -238,8 +268,14 @@ function CheckoutPage() {
               </dl>
               <button
                 type="submit"
-                disabled={submitting || !isSupabaseConfigured}
+                disabled={submitting || !isSupabaseConfigured || !user}
                 onClick={(e) => {
+                  if (!user) {
+                    e.preventDefault();
+                    toast.error("অর্ডার করতে লগইন করুন");
+                    void navigate({ to: "/login" });
+                    return;
+                  }
                   if (!isSupabaseConfigured) {
                     e.preventDefault();
                     toast.error(
