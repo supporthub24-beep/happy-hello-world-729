@@ -103,37 +103,37 @@ function toNumber(value: unknown): number {
 
 function normalizeFilmRoll(row: Record<string, unknown>): FilmRollMovement {
   return {
-    id: String(row.id ?? ""),
-    direction: (row.direction === "out" ? "out" : "in") as Direction,
-    roll_type: (row.roll_type as RollType) ?? "BOPP",
-    size: String(row.size ?? ""),
-    micron: toNumber(row.micron),
-    weight_kg: toNumber(row.weight_kg),
-    supplier: String(row.supplier ?? ""),
-    notes: String(row.notes ?? ""),
-    movement_date: String(row.movement_date ?? ""),
-    created_by: (row.created_by as string | null) ?? null,
-    created_by_name: String(row.created_by_name ?? ""),
-    created_at: String(row.created_at ?? ""),
-    updated_at: String(row.updated_at ?? ""),
+    id: String(row["id"] ?? ""),
+    direction: (row["direction"] === "out" ? "out" : "in") as Direction,
+    roll_type: (row["roll_type"] as RollType) ?? "BOPP",
+    size: String(row["size"] ?? ""),
+    micron: toNumber(row["micron"]),
+    weight_kg: toNumber(row["weight_kg"]),
+    supplier: String(row["supplier"] ?? ""),
+    notes: String(row["notes"] ?? ""),
+    movement_date: String(row["movement_date"] ?? ""),
+    created_by: (row["created_by"] as string | null) ?? null,
+    created_by_name: String(row["created_by_name"] ?? ""),
+    created_at: String(row["created_at"] ?? ""),
+    updated_at: String(row["updated_at"] ?? ""),
   };
 }
 
 function normalizeGranule(row: Record<string, unknown>): GranuleMovement {
   return {
-    id: String(row.id ?? ""),
-    direction: (row.direction === "out" ? "out" : "in") as Direction,
-    grade: String(row.grade ?? ""),
-    batch_number: String(row.batch_number ?? ""),
-    supplier: String(row.supplier ?? ""),
-    machine: String(row.machine ?? ""),
-    weight_kg: toNumber(row.weight_kg),
-    notes: String(row.notes ?? ""),
-    movement_date: String(row.movement_date ?? ""),
-    created_by: (row.created_by as string | null) ?? null,
-    created_by_name: String(row.created_by_name ?? ""),
-    created_at: String(row.created_at ?? ""),
-    updated_at: String(row.updated_at ?? ""),
+    id: String(row["id"] ?? ""),
+    direction: (row["direction"] === "out" ? "out" : "in") as Direction,
+    grade: String(row["grade"] ?? ""),
+    batch_number: String(row["batch_number"] ?? ""),
+    supplier: String(row["supplier"] ?? ""),
+    machine: String(row["machine"] ?? ""),
+    weight_kg: toNumber(row["weight_kg"]),
+    notes: String(row["notes"] ?? ""),
+    movement_date: String(row["movement_date"] ?? ""),
+    created_by: (row["created_by"] as string | null) ?? null,
+    created_by_name: String(row["created_by_name"] ?? ""),
+    created_at: String(row["created_at"] ?? ""),
+    updated_at: String(row["updated_at"] ?? ""),
   };
 }
 

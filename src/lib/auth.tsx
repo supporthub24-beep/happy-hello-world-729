@@ -40,9 +40,9 @@ const NOT_CONFIGURED_MESSAGE =
 function fallbackName(user: User | null): string {
   if (!user) return "";
   const meta = (user.user_metadata ?? {}) as Record<string, unknown>;
-  const metaName = typeof meta.full_name === "string" ? meta.full_name : "";
+  const metaName = typeof meta["full_name"] === "string" ? (meta["full_name"] as string) : "";
   if (metaName.trim()) return metaName.trim();
-  if (user.email) return user.email.split("@")[0];
+  if (user.email) return user.email.split("@")[0] ?? "Staff";
   return "Staff";
 }
 
@@ -92,12 +92,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     let active = true;
 
-    supabase
-      .from("profiles")
-      .select("id, full_name, email")
-      .eq("id", user.id)
-      .maybeSingle()
-      .then(({ data }) => {
+    void (async () => {
+      try {
+        const { data } = await supabase
+          .from("profiles")
+          .select("id, full_name, email")
+          .eq("id", user.id)
+          .maybeSingle();
         if (!active) return;
         if (data) {
           setProfile({
@@ -112,15 +113,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             email: user.email ?? "",
           });
         }
-      })
-      .catch(() => {
+      } catch {
         if (!active) return;
         setProfile({
           id: user.id,
           full_name: fallbackName(user),
           email: user.email ?? "",
         });
-      });
+      }
+    })();
+
 
     return () => {
       active = false;

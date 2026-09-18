@@ -12,7 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as GranulesRouteImport } from './routes/granules'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as OrderConfirmedRouteImport } from './routes/order-confirmed'
+import { Route as RollsRouteImport } from './routes/rolls'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,9 +33,29 @@ const CheckoutRoute = CheckoutRouteImport.update({
   path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GranulesRoute = GranulesRouteImport.update({
+  id: '/granules',
+  path: '/granules',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OrderConfirmedRoute = OrderConfirmedRouteImport.update({
   id: '/order-confirmed',
   path: '/order-confirmed',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RollsRoute = RollsRouteImport.update({
+  id: '/rolls',
+  path: '/rolls',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -39,34 +63,75 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/dashboard': typeof DashboardRoute
+  '/granules': typeof GranulesRoute
+  '/login': typeof LoginRoute
   '/order-confirmed': typeof OrderConfirmedRoute
+  '/rolls': typeof RollsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/dashboard': typeof DashboardRoute
+  '/granules': typeof GranulesRoute
+  '/login': typeof LoginRoute
   '/order-confirmed': typeof OrderConfirmedRoute
+  '/rolls': typeof RollsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/dashboard': typeof DashboardRoute
+  '/granules': typeof GranulesRoute
+  '/login': typeof LoginRoute
   '/order-confirmed': typeof OrderConfirmedRoute
+  '/rolls': typeof RollsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cart' | '/checkout' | '/order-confirmed'
+  fullPaths:
+    | '/'
+    | '/cart'
+    | '/checkout'
+    | '/dashboard'
+    | '/granules'
+    | '/login'
+    | '/order-confirmed'
+    | '/rolls'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cart' | '/checkout' | '/order-confirmed'
-  id: '__root__' | '/' | '/cart' | '/checkout' | '/order-confirmed'
+  to:
+    | '/'
+    | '/cart'
+    | '/checkout'
+    | '/dashboard'
+    | '/granules'
+    | '/login'
+    | '/order-confirmed'
+    | '/rolls'
+  id:
+    | '__root__'
+    | '/'
+    | '/cart'
+    | '/checkout'
+    | '/dashboard'
+    | '/granules'
+    | '/login'
+    | '/order-confirmed'
+    | '/rolls'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
+  DashboardRoute: typeof DashboardRoute
+  GranulesRoute: typeof GranulesRoute
+  LoginRoute: typeof LoginRoute
   OrderConfirmedRoute: typeof OrderConfirmedRoute
+  RollsRoute: typeof RollsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,11 +157,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/granules': {
+      id: '/granules'
+      path: '/granules'
+      fullPath: '/granules'
+      preLoaderRoute: typeof GranulesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/order-confirmed': {
       id: '/order-confirmed'
       path: '/order-confirmed'
       fullPath: '/order-confirmed'
       preLoaderRoute: typeof OrderConfirmedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rolls': {
+      id: '/rolls'
+      path: '/rolls'
+      fullPath: '/rolls'
+      preLoaderRoute: typeof RollsRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -106,7 +199,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
+  DashboardRoute: DashboardRoute,
+  GranulesRoute: GranulesRoute,
+  LoginRoute: LoginRoute,
   OrderConfirmedRoute: OrderConfirmedRoute,
+  RollsRoute: RollsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
