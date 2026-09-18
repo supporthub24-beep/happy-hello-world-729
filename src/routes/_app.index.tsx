@@ -6,7 +6,6 @@ import {
   ArrowDownToLine,
   ArrowUpFromLine,
   Boxes,
-  Loader2,
   Package,
   Scale,
 } from "lucide-react";
@@ -42,7 +41,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export const Route = createFileRoute("/_app/")({
+export const Route = createFileRoute("/_app/dashboard")({
   component: DashboardPage,
 });
 
