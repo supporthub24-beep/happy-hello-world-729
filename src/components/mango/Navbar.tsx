@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
-import { Flame, Menu, ShoppingCart, Timer, X } from "lucide-react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { Flame, LogIn, LogOut, Menu, ShoppingCart, Timer, User, X } from "lucide-react";
 import { useCart } from "@/lib/cart";
+import { useAuth } from "@/lib/auth";
 import brandLogo from "@/assets/guardstone-logo.png.asset.json";
 
 const links = [
@@ -16,6 +17,8 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { count } = useCart();
+  const { user, loading, displayName, signOut } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -23,6 +26,12 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  async function handleSignOut() {
+    await signOut();
+    setOpen(false);
+    void navigate({ to: "/" });
+  }
 
   return (
     <header
@@ -78,7 +87,7 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <Link
             to="/cart"
-            aria-label="Open cart"
+            aria-label={`Open cart${count > 0 ? `, ${count} items` : ""}`}
             className="relative rounded-full border border-white/40 bg-white/20 p-2.5 text-foreground shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-white/35 hover:shadow-xl hover:shadow-mango/20 hover:border-white/50"
           >
             <ShoppingCart className="size-5 drop-shadow-sm" />
@@ -88,6 +97,31 @@ export function Navbar() {
               </span>
             )}
           </Link>
+
+          {!loading && user ? (
+            <div className="hidden items-center gap-2 md:flex">
+              <span className="inline-flex max-w-[10rem] items-center gap-1.5 rounded-full border border-white/40 bg-white/20 px-3 py-2 text-xs font-semibold text-foreground shadow-lg backdrop-blur-md">
+                <User className="size-3.5 shrink-0" aria-hidden="true" />
+                <span className="truncate">{displayName || "Staff"}</span>
+              </span>
+              <button
+                type="button"
+                onClick={handleSignOut}
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/40 bg-white/20 px-3 py-2 text-xs font-semibold text-foreground shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/35 hover:border-white/50"
+              >
+                <LogOut className="size-3.5" aria-hidden="true" />
+                লগআউট
+              </button>
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="hidden items-center gap-1.5 rounded-full border border-white/40 bg-white/20 px-4 py-2.5 text-sm font-semibold text-foreground shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/35 hover:border-white/50 md:inline-flex"
+            >
+              <LogIn className="size-4" aria-hidden="true" />
+              লগইন
+            </Link>
+          )}
 
           <Link
             to="/"
@@ -135,6 +169,37 @@ export function Navbar() {
                 Cart ({count})
               </Link>
             </li>
+            {!loading && user ? (
+              <>
+                <li>
+                  <span className="flex items-center gap-2 px-2 py-3 text-sm font-bold text-foreground drop-shadow-sm">
+                    <User className="size-4" aria-hidden="true" />
+                    {displayName || "Staff"}
+                  </span>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={handleSignOut}
+                    className="flex w-full items-center gap-2 rounded-lg px-2 py-3 text-left text-sm font-bold text-foreground transition-all duration-200 hover:bg-white/10 hover:pl-2 hover:text-mango-deep drop-shadow-sm"
+                  >
+                    <LogOut className="size-4" aria-hidden="true" />
+                    লগআউট
+                  </button>
+                </li>
+              </>
+            ) : (
+              <li>
+                <Link
+                  to="/login"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-2 rounded-lg px-2 py-3 text-sm font-bold text-foreground transition-all duration-200 hover:bg-white/10 hover:pl-2 hover:text-mango-deep drop-shadow-sm"
+                >
+                  <LogIn className="size-4" aria-hidden="true" />
+                  লগইন / রেজিস্টার
+                </Link>
+              </li>
+            )}
             <li className="pt-3 mt-2 border-t border-white/20">
               <Link
                 to="/"

@@ -46,6 +46,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useAuth } from "@/lib/auth";
+import { useCart } from "@/lib/cart";
 import {
   ROLL_TYPES,
   aggregateFilmRollStock,
@@ -110,6 +111,7 @@ const emptyForm: EntryFormState = {
 function RollsPage() {
   const navigate = useNavigate();
   const { user, loading: authLoading, configured, displayName, signOut } = useAuth();
+  const { addItem } = useCart();
 
   const [movements, setMovements] = useState<FilmRollMovement[]>([]);
   const [loading, setLoading] = useState(true);
@@ -181,6 +183,16 @@ function RollsPage() {
   async function handleSignOut() {
     await signOut();
     void navigate({ to: "/login" });
+  }
+
+  function handleAddToCart(row: ReturnType<typeof aggregateFilmRollStock>[number]) {
+    addItem({
+      id: `roll-${row.roll_type}-${row.size}-${row.micron}`,
+      name: `${row.roll_type} ফিল্ম রোল`,
+      bangla: `${row.size} · ${row.micron} মাইক্রন`,
+      price: 0,
+      image: "",
+    });
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -639,7 +651,11 @@ function RollsPage() {
                       onAction={() => setReloadKey((key) => key + 1)}
                     />
                   ) : (
-                    <StockTable rows={stockRows} filters={filters} />
+                    <StockTable
+                      rows={stockRows}
+                      filters={filters}
+                      onAddToCart={handleAddToCart}
+                    />
                   )}
                 </CardContent>
               </Card>
@@ -854,9 +870,11 @@ function SummaryCard({
 function StockTable({
   rows,
   filters,
+  onAddToCart,
 }: {
   rows: ReturnType<typeof aggregateFilmRollStock>;
   filters: FilmRollFilters;
+  onAddToCart: (row: ReturnType<typeof aggregateFilmRollStock>[number]) => void;
 }) {
   const size = filters.size?.trim().toLowerCase() ?? "";
   const micron = filters.micron?.trim() ?? "";
@@ -888,6 +906,7 @@ function StockTable({
             <TableHead className="text-right">ইনকামিং</TableHead>
             <TableHead className="text-right">আউটগোয়িং</TableHead>
             <TableHead className="text-right">ব্যালেন্স</TableHead>
+            <TableHead className="text-right">অ্যাকশন</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -906,6 +925,16 @@ function StockTable({
               </TableCell>
               <TableCell className="text-right font-semibold tabular-nums">
                 {formatKg(row.balance_kg)}
+              </TableCell>
+              <TableCell className="text-right">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => onAddToCart(row)}
+                  aria-label={`${row.roll_type} ${row.size} ${row.micron} মাইক্রন কার্টে যোগ করুন`}
+                >
+                  কার্টে যোগ করুন
+                </Button>
               </TableCell>
             </TableRow>
           ))}

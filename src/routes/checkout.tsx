@@ -5,7 +5,6 @@ import { Navbar } from "@/components/mango/Navbar";
 import { Footer } from "@/components/mango/Footer";
 import { formatBDT, useCart } from "@/lib/cart";
 import { DELIVERY_FEE, FREE_DELIVERY_OVER } from "./cart";
-import { isSupabaseConfigured } from "@/lib/supabase";
 import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/checkout")({
@@ -33,7 +32,7 @@ const inputClass =
   "mt-1 w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-mango";
 
 function CheckoutPage() {
-  const { items, subtotal, clear } = useCart();
+  const { items, subtotal, clear, placeOrder } = useCart();
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
   const [method, setMethod] = useState<"cod" | "bkash" | "bank">("cod");
@@ -61,39 +60,22 @@ function CheckoutPage() {
       toast.error("Your cart is empty");
       return;
     }
-    if (!isSupabaseConfigured) {
-      toast.error(
-        "Supabase কনফিগার করা নেই। VITE_SUPABASE_URL এবং VITE_SUPABASE_ANON_KEY সেট করুন।",
-      );
-      return;
-    }
     const form = new FormData(e.currentTarget);
     if (method === "bkash" && !String(form.get("trxId") ?? "").trim()) {
       toast.error("bKash Transaction ID দিন");
       return;
     }
     setSubmitting(true);
-    const order = {
-      id: `MF-${Date.now().toString().slice(-6)}`,
-      name: String(form.get("name") ?? ""),
-      phone: String(form.get("phone") ?? ""),
-      address: String(form.get("address") ?? ""),
-      note: String(form.get("note") ?? ""),
-      status: "প্রস্তুত করা হচ্ছে" as const,
-      statusSteps: [
-        { name: "অর্ডার গৃহীত", done: true, time: new Date().toISOString() },
-        { name: "প্রস্তুত করা হচ্ছে", done: true, time: new Date().toISOString() },
-        { name: "পাঠানো হয়েছে", done: false },
-        { name: "ডেলিভারি হয়েছে", done: false },
-      ] as const,
-      method,
-      trxId: String(form.get("trxId") ?? ""),
-      total,
-      items: items.map((i) => ({ name: i.name, qty: i.qty, price: i.price, id: i.id })),
-      createdAt: new Date().toISOString(),
-    };
-    localStorage.setItem("mango-fresh-last-order", JSON.stringify(order));
-    clear();
+    placeOrder(
+      {
+        name: String(form.get("name") ?? ""),
+        phone: String(form.get("phone") ?? ""),
+        address: String(form.get("address") ?? ""),
+        landmark: String(form.get("note") ?? ""),
+      },
+      method === "cod" ? "cod" : "online",
+    );
+    toast.success("অর্ডার নিশ্চিত হয়েছে");
     navigate({ to: "/order-confirmed" });
   }
 
@@ -104,20 +86,6 @@ function CheckoutPage() {
         <h1 className="font-display text-3xl font-semibold tracking-tight text-secondary md:text-4xl">
           Checkout <span className="text-lg font-normal text-muted-foreground">চেকআউট</span>
         </h1>
-
-        {!isSupabaseConfigured ? (
-          <div
-            role="alert"
-            className="mt-6 rounded-2xl border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive"
-          >
-            <p className="font-semibold">Supabase কনফিগার করা নেই</p>
-            <p className="mt-1">
-              <code className="font-mono text-xs">VITE_SUPABASE_URL</code> এবং{" "}
-              <code className="font-mono text-xs">VITE_SUPABASE_ANON_KEY</code> সেট করার পর
-              অর্ডার নিশ্চিত করা যাবে।
-            </p>
-          </div>
-        ) : null}
 
         {authLoading ? (
           <div className="mt-10 rounded-3xl border border-border bg-card p-12 text-center">
@@ -268,19 +236,12 @@ function CheckoutPage() {
               </dl>
               <button
                 type="submit"
-                disabled={submitting || !isSupabaseConfigured || !user}
+                disabled={submitting || !user}
                 onClick={(e) => {
                   if (!user) {
                     e.preventDefault();
                     toast.error("অর্ডার করতে লগইন করুন");
                     void navigate({ to: "/login" });
-                    return;
-                  }
-                  if (!isSupabaseConfigured) {
-                    e.preventDefault();
-                    toast.error(
-                      "Supabase কনফিগার করা নেই। VITE_SUPABASE_URL এবং VITE_SUPABASE_ANON_KEY সেট করুন।",
-                    );
                     return;
                   }
                   if (method === "bank") {
@@ -307,27 +268,16 @@ function CheckoutPage() {
             const form = document.querySelector("form");
             if (form) {
               const formData = new FormData(form as HTMLFormElement);
-              const order = {
-                id: `MF-${Date.now().toString().slice(-6)}`,
-                name: String(formData.get("name") ?? ""),
-                phone: String(formData.get("phone") ?? ""),
-                address: String(formData.get("address") ?? ""),
-                note: String(formData.get("note") ?? ""),
-                status: "প্রস্তুত করা হচ্ছে" as const,
-                statusSteps: [
-                  { name: "অর্ডার গৃহীত", done: true, time: new Date().toISOString() },
-                  { name: "প্রস্তুত করা হচ্ছে", done: true, time: new Date().toISOString() },
-                  { name: "পাঠানো হয়েছে", done: false },
-                  { name: "ডেলিভারি হয়েছে", done: false },
-                ] as const,
-                method: "bank" as const,
-                trxId: `BANK-${Date.now().toString().slice(-8)}`,
-                total,
-                items: items.map((i) => ({ name: i.name, qty: i.qty, price: i.price, id: i.id })),
-                createdAt: new Date().toISOString(),
-              };
-              localStorage.setItem("mango-fresh-last-order", JSON.stringify(order));
-              clear();
+              placeOrder(
+                {
+                  name: String(formData.get("name") ?? ""),
+                  phone: String(formData.get("phone") ?? ""),
+                  address: String(formData.get("address") ?? ""),
+                  landmark: String(formData.get("note") ?? ""),
+                },
+                "online",
+              );
+              toast.success("অর্ডার নিশ্চিত হয়েছে");
               navigate({ to: "/order-confirmed" });
             }
           }}
