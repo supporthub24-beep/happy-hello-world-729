@@ -10,21 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AppRouteImport } from './routes/_app'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as OrderConfirmedRouteImport } from './routes/order-confirmed'
-import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
-import { Route as AppFilmRouteImport } from './routes/_app.film'
-import { Route as AppGranulesRouteImport } from './routes/_app.granules'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AppRoute = AppRouteImport.update({
-  id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartRoute = CartRouteImport.update({
@@ -42,85 +34,36 @@ const OrderConfirmedRoute = OrderConfirmedRouteImport.update({
   path: '/order-confirmed',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppDashboardRoute = AppDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppFilmRoute = AppFilmRouteImport.update({
-  id: '/film',
-  path: '/film',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppGranulesRoute = AppGranulesRouteImport.update({
-  id: '/granules',
-  path: '/granules',
-  getParentRoute: () => AppRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/order-confirmed': typeof OrderConfirmedRoute
-  '/dashboard': typeof AppDashboardRoute
-  '/film': typeof AppFilmRoute
-  '/granules': typeof AppGranulesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/order-confirmed': typeof OrderConfirmedRoute
-  '/dashboard': typeof AppDashboardRoute
-  '/film': typeof AppFilmRoute
-  '/granules': typeof AppGranulesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_app': typeof AppRouteWithChildren
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/order-confirmed': typeof OrderConfirmedRoute
-  '/_app/dashboard': typeof AppDashboardRoute
-  '/_app/film': typeof AppFilmRoute
-  '/_app/granules': typeof AppGranulesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/cart'
-    | '/checkout'
-    | '/order-confirmed'
-    | '/dashboard'
-    | '/film'
-    | '/granules'
+  fullPaths: '/' | '/cart' | '/checkout' | '/order-confirmed'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/cart'
-    | '/checkout'
-    | '/order-confirmed'
-    | '/dashboard'
-    | '/film'
-    | '/granules'
-  id:
-    | '__root__'
-    | '/'
-    | '/_app'
-    | '/cart'
-    | '/checkout'
-    | '/order-confirmed'
-    | '/_app/dashboard'
-    | '/_app/film'
-    | '/_app/granules'
+  to: '/' | '/cart' | '/checkout' | '/order-confirmed'
+  id: '__root__' | '/' | '/cart' | '/checkout' | '/order-confirmed'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AppRoute: typeof AppRouteWithChildren
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
   OrderConfirmedRoute: typeof OrderConfirmedRoute
@@ -133,13 +76,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_app': {
-      id: '/_app'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cart': {
@@ -163,47 +99,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrderConfirmedRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_app/dashboard': {
-      id: '/_app/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AppDashboardRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/film': {
-      id: '/_app/film'
-      path: '/film'
-      fullPath: '/film'
-      preLoaderRoute: typeof AppFilmRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/granules': {
-      id: '/_app/granules'
-      path: '/granules'
-      fullPath: '/granules'
-      preLoaderRoute: typeof AppGranulesRouteImport
-      parentRoute: typeof AppRoute
-    }
   }
 }
 
-interface AppRouteChildren {
-  AppDashboardRoute: typeof AppDashboardRoute
-  AppFilmRoute: typeof AppFilmRoute
-  AppGranulesRoute: typeof AppGranulesRoute
-}
-
-const AppRouteChildren: AppRouteChildren = {
-  AppDashboardRoute: AppDashboardRoute,
-  AppFilmRoute: AppFilmRoute,
-  AppGranulesRoute: AppGranulesRoute,
-}
-
-const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AppRoute: AppRouteWithChildren,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
   OrderConfirmedRoute: OrderConfirmedRoute,
