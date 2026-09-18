@@ -92,12 +92,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     let active = true;
 
-    supabase
-      .from("profiles")
-      .select("id, full_name, email")
-      .eq("id", user.id)
-      .maybeSingle()
-      .then(({ data }) => {
+    void (async () => {
+      try {
+        const { data } = await supabase
+          .from("profiles")
+          .select("id, full_name, email")
+          .eq("id", user.id)
+          .maybeSingle();
         if (!active) return;
         if (data) {
           setProfile({
@@ -112,15 +113,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             email: user.email ?? "",
           });
         }
-      })
-      .catch(() => {
+      } catch {
         if (!active) return;
         setProfile({
           id: user.id,
           full_name: fallbackName(user),
           email: user.email ?? "",
         });
-      });
+      }
+    })();
+
 
     return () => {
       active = false;
