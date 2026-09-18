@@ -12,8 +12,8 @@ const footerLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-ippbx-border/70 bg-ippbx-navy/60 px-4 py-12 sm:px-6 sm:py-14 lg:px-8">
-      <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-8">
+    <footer className="relative border-t-2 border-ippbx-blue/40 bg-ippbx-navy/80 px-4 py-14 shadow-2xl shadow-ippbx-navy/60 sm:px-6 sm:py-16 lg:px-8">
+      <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-9">
         <Link
           to="/"
           hash="top"
@@ -30,10 +30,10 @@ export function Footer() {
             className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105 sm:h-12"
           />
           <span className="flex flex-col leading-none">
-            <span className="font-display text-xl font-bold tracking-tight text-foreground">
+            <span className="font-display text-xl font-extrabold tracking-tight text-foreground">
               GuardStone
             </span>
-            <span className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+            <span className="mt-0.5 text-[10px] font-bold uppercase tracking-[0.16em] text-ippbx-blue">
               Authorized Reseller · Bangladesh
             </span>
           </span>
@@ -47,7 +47,7 @@ export function Footer() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-lg text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
+                  className="rounded-lg text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
                 >
                   {link.label}
                 </a>
@@ -56,7 +56,7 @@ export function Footer() {
           </ul>
         </nav>
 
-        <p className="text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
+        <p className="text-center text-xs font-medium leading-relaxed text-muted-foreground sm:text-sm">
           © 2026 GuardStone — Lovable Pro Plan Authorized Reseller. সকল অধিকার সংরক্ষিত।
         </p>
       </div>

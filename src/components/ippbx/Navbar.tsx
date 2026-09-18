@@ -30,8 +30,8 @@ export function Navbar() {
     <header
       className={`sticky top-0 z-50 w-full transition-colors duration-300 ${
         scrolled
-          ? "border-b border-ippbx-border/70 bg-ippbx-navy/85 backdrop-blur-xl"
-          : "border-b border-transparent bg-transparent"
+          ? "border-b-2 border-ippbx-blue/40 bg-ippbx-navy/90 shadow-xl shadow-ippbx-navy/60 backdrop-blur-xl"
+          : "border-b-2 border-transparent bg-transparent"
       }`}
     >
       <nav
@@ -52,10 +52,10 @@ export function Navbar() {
             className="h-9 w-9 rounded-xl object-contain transition-transform duration-300 group-hover:scale-105 sm:h-10 sm:w-10"
           />
           <span className="flex flex-col leading-none">
-            <span className="font-display text-xl font-bold tracking-tight text-foreground">
+            <span className="font-display text-xl font-extrabold tracking-tight text-foreground">
               GuardStone
             </span>
-            <span className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+            <span className="mt-0.5 text-[10px] font-bold uppercase tracking-[0.16em] text-ippbx-blue">
               Authorized BD
             </span>
           </span>
@@ -66,7 +66,7 @@ export function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="rounded-lg px-3.5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
+                className="rounded-lg px-3.5 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
               >
                 {link.label}
               </a>
@@ -79,13 +79,13 @@ export function Navbar() {
             href="https://itfair.bd/ippbx"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-ippbx-border px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:border-ippbx-blue hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
+            className="rounded-full border-2 border-ippbx-border px-4 py-2 text-sm font-bold text-foreground transition-all hover:border-ippbx-blue hover:bg-white/10 hover:shadow-lg hover:shadow-ippbx-blue/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ippbx-navy"
           >
             My Dashboard
           </a>
           <a
             href="tel:09638461270"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-ippbx-blue to-ippbx-violet px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-ippbx-blue/25 transition-all hover:brightness-110 hover:shadow-ippbx-blue/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ippbx-navy"
+            className="ippbx-gradient-cta inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-ippbx-blue/40 transition-all hover:brightness-110 hover:shadow-xl hover:shadow-ippbx-violet/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ippbx-navy"
           >
             <Phone className="h-4 w-4" aria-hidden="true" />
             09638461270
@@ -95,7 +95,7 @@ export function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="সাপোর্ট"
-            className="group inline-flex items-center gap-2 rounded-full border border-ippbx-border px-3 py-1.5 text-sm font-semibold text-foreground transition-colors hover:border-ippbx-blue hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
+            className="group inline-flex items-center gap-2 rounded-full border-2 border-ippbx-border px-3 py-1.5 text-sm font-bold text-foreground transition-all hover:border-ippbx-blue hover:bg-white/10 hover:shadow-lg hover:shadow-ippbx-blue/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ippbx-navy"
           >
             <img
               src="/generated/5731b571-50b-download.png"
@@ -116,7 +116,7 @@ export function Navbar() {
           aria-expanded={open}
           aria-controls="ippbx-mobile-menu"
           aria-label={open ? "মেনু বন্ধ করুন" : "মেনু খুলুন"}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ippbx-border text-foreground transition-colors hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border-2 border-ippbx-border text-foreground transition-colors hover:border-ippbx-blue hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue md:hidden"
         >
           {open ? (
             <X className="h-5 w-5" aria-hidden="true" />
@@ -129,7 +129,7 @@ export function Navbar() {
       {open && (
         <div
           id="ippbx-mobile-menu"
-          className="border-t border-ippbx-border/70 bg-ippbx-navy/95 backdrop-blur-xl md:hidden"
+          className="border-t-2 border-ippbx-blue/40 bg-ippbx-navy/95 shadow-2xl shadow-ippbx-navy/60 backdrop-blur-xl md:hidden"
         >
           <ul className="mx-auto flex w-full max-w-7xl flex-col gap-1 px-4 py-4 sm:px-6">
             {navLinks.map((link) => (
@@ -137,7 +137,7 @@ export function Navbar() {
                 <a
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-xl px-4 py-3 text-base font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
+                  className="block rounded-xl px-4 py-3 text-base font-semibold text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
                 >
                   {link.label}
                 </a>
@@ -149,14 +149,14 @@ export function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="rounded-full border border-ippbx-border px-4 py-3 text-center text-sm font-semibold text-foreground transition-colors hover:border-ippbx-blue hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
+                className="rounded-full border-2 border-ippbx-border px-4 py-3 text-center text-sm font-bold text-foreground transition-all hover:border-ippbx-blue hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
               >
                 My Dashboard
               </a>
               <a
                 href="tel:09638461270"
                 onClick={() => setOpen(false)}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-ippbx-blue to-ippbx-violet px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-ippbx-blue/25 transition-all hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
+                className="ippbx-gradient-cta inline-flex items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-bold text-white shadow-lg shadow-ippbx-blue/40 transition-all hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
               >
                 <Phone className="h-4 w-4" aria-hidden="true" />
                 09638461270
@@ -166,7 +166,7 @@ export function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-ippbx-border px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:border-ippbx-blue hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-ippbx-border px-4 py-3 text-sm font-bold text-foreground transition-all hover:border-ippbx-blue hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue"
               >
                 <img
                   src="/generated/5731b571-50b-download.png"

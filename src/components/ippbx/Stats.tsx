@@ -35,20 +35,19 @@ export function Stats() {
           return (
             <div
               key={stat.label}
-              className="ippbx-card relative overflow-hidden rounded-2xl border-l-4 border-l-ippbx-blue px-5 py-6 text-center shadow-lg shadow-ippbx-navy/40 sm:px-6 sm:py-7"
+              className="ippbx-card group relative overflow-hidden rounded-2xl border-l-4 border-l-ippbx-blue px-5 py-6 text-center shadow-xl shadow-ippbx-navy/60 ring-1 ring-ippbx-border/60 transition-all duration-300 hover:-translate-y-1 hover:border-l-ippbx-violet hover:shadow-2xl hover:shadow-ippbx-blue/30 sm:px-6 sm:py-7"
             >
               <span
                 aria-hidden="true"
-                className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-ippbx-blue/20 blur-2xl"
+                className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-ippbx-blue/20 blur-2xl transition-opacity duration-300 group-hover:opacity-100"
               />
-              <Icon
-                className="mx-auto h-6 w-6 text-ippbx-blue"
-                aria-hidden="true"
-              />
-              <p className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-ippbx-blue to-ippbx-violet shadow-lg shadow-ippbx-blue/30">
+                <Icon className="h-6 w-6 text-white" aria-hidden="true" />
+              </span>
+              <p className="mt-4 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
                 {stat.value}
               </p>
-              <p className="mt-1.5 text-sm font-medium text-muted-foreground sm:text-base">
+              <p className="mt-1.5 text-sm font-semibold uppercase tracking-[0.08em] text-muted-foreground sm:text-base">
                 {stat.label}
               </p>
             </div>

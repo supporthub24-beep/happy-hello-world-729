@@ -30,48 +30,54 @@ export function TrialFeatures() {
     >
       <div className="mx-auto w-full max-w-6xl">
         <div className="flex flex-col items-center text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border-2 border-ippbx-green/70 bg-ippbx-green/15 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-ippbx-green shadow-lg shadow-ippbx-green/20 sm:text-sm">
+            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" />
+            No Hidden Charge
+          </span>
           <h2
             id="ippbx-trial-heading"
-            className="font-display text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+            className="mt-6 font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-foreground sm:text-5xl lg:text-6xl"
           >
             🎁 ৩ দিন ফ্রি ট্রায়াল
           </h2>
-          <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="mt-5 max-w-3xl text-lg font-medium leading-relaxed text-foreground/80 sm:text-xl">
             এই সকল সুবিধা ৩ দিন ফ্রি ট্রায়াল দিয়ে যাচাই করুন — ভালো লাগলে তারপর পেমেন্ট করুন। কোনো
             হিডেন চার্জ নেই।
           </p>
         </div>
 
-        <ul className="mt-10 grid grid-cols-1 gap-3 sm:mt-12 sm:gap-4 lg:grid-cols-2">
+        <ul className="mt-12 grid grid-cols-1 gap-4 sm:mt-14 sm:gap-5 lg:grid-cols-2">
           {features.map((feature) => (
             <li
               key={feature}
-              className="ippbx-card flex items-start gap-3 rounded-2xl px-4 py-4 shadow-lg shadow-ippbx-navy/40 sm:px-5"
+              className="ippbx-card group flex items-start gap-3.5 rounded-2xl border-l-4 border-l-ippbx-green px-5 py-5 shadow-xl shadow-ippbx-navy/60 ring-1 ring-ippbx-border/60 transition-all duration-300 hover:-translate-y-1 hover:border-l-ippbx-blue hover:shadow-2xl hover:shadow-ippbx-blue/30 sm:px-6"
             >
-              <CheckCircle2
-                className="mt-0.5 h-5 w-5 shrink-0 text-ippbx-green"
-                aria-hidden="true"
-              />
-              <span className="text-sm leading-relaxed text-foreground sm:text-base">
+              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ippbx-green/15 ring-1 ring-ippbx-green/40 transition-colors duration-300 group-hover:bg-ippbx-blue/15 group-hover:ring-ippbx-blue/40">
+                <CheckCircle2
+                  className="h-4.5 w-4.5 text-ippbx-green transition-colors duration-300 group-hover:text-ippbx-blue"
+                  aria-hidden="true"
+                />
+              </span>
+              <span className="text-base font-semibold leading-relaxed text-foreground sm:text-lg">
                 {feature}
               </span>
             </li>
           ))}
         </ul>
 
-        <div className="mt-10 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+        <div className="mt-12 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
           <a
             href="https://itfair.bd/ippbx"
             target="_blank"
             rel="noopener noreferrer"
-            className="ippbx-gradient-cta inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-ippbx-blue/30 transition-all hover:brightness-110 hover:shadow-ippbx-violet/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ippbx-navy"
+            className="ippbx-gradient-cta inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-lg font-bold text-white shadow-xl shadow-ippbx-blue/40 ring-2 ring-ippbx-blue/40 transition-all hover:scale-[1.03] hover:brightness-110 hover:shadow-2xl hover:shadow-ippbx-violet/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ippbx-navy"
           >
             <FileText className="h-5 w-5" aria-hidden="true" />
             ড্যাশবোর্ড অ্যাক্সেস করুন
           </a>
           <a
             href="tel:09638461270"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-ippbx-blue/70 bg-ippbx-blue/10 px-7 py-3.5 text-base font-semibold text-ippbx-blue transition-all hover:bg-ippbx-blue/20 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ippbx-navy"
+            className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-ippbx-blue/80 bg-ippbx-blue/15 px-8 py-4 text-lg font-bold text-ippbx-blue shadow-lg shadow-ippbx-blue/20 transition-all hover:scale-[1.03] hover:bg-ippbx-blue/25 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ippbx-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ippbx-navy"
           >
             <PhoneCall className="h-5 w-5" aria-hidden="true" />
             আরও বিস্তারিত জানুন

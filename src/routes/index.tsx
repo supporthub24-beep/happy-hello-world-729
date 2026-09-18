@@ -38,7 +38,7 @@ function Index() {
   return (
     <div id="top" className="min-h-screen bg-background font-sans">
       <Navbar />
-      <main>
+      <main className="divide-y divide-ippbx-border/60">
         <Hero />
         <Stats />
         <OfferBanner />
